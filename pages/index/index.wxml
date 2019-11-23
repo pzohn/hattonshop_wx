@@ -1,0 +1,128 @@
+<view class="navbar">
+    <view class="search">
+        <view class="searchBg">
+          <view>
+            <image src="../../images/sousuo.png" style="width:25px;height:25px;padding-top:2px;padding-right:5px;"></image>
+          </view>
+          <view>
+            <input type="text" placeholder="请输入关键字" placeholder-class="holder" bindinput="accountInput"           />
+          </view>
+        </view>
+        <view class="btn1" bindtap="resetSearch">搜  索</view>
+      </view>
+    <!-- tab导航栏 -->
+    <!-- scroll-left属性可以控制滚动条位置 -->
+    <!-- scroll-with-animation滚动添加动画过渡 -->
+    <scroll-view scroll-x="true" class="nav" scroll-left="{{navScrollLeft}}" scroll-with-animation="{{true}}">
+        <block wx:for="{{navData}}" wx:for-index="idx" wx:for-item="navItem" wx:key="idx">
+            <view class="nav-item {{currentTab == idx ?'active':''}}"  data-current="{{idx}}" bindtap="switchNav">{{navItem.text}}</view>
+        </block>        
+    </scroll-view>
+    <!-- 页面内容 -->
+    <swiper class="tab-box" current="{{currentTab}}" duration="300" bindchange="switchTab">        
+        <swiper-item wx:for="{{[0,1,2,3,4,5,6]}}" wx:for-item="tabItem" wx:for-index="idx" wx:key="idx" class="tab-content">
+            {{tabItem}}
+        </swiper-item>
+    </swiper>
+</view>
+
+<view class='video_swiper' hidden="{{flag_1}}">
+  <swiper class="lunbo" id="lunbo" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+    <block wx:for="{{imgUrls}}" wx:key="{{imgUrls}}">
+        <swiper-item>
+          <image src="{{item}}" class="slide-image"/>
+        </swiper-item>
+    </block>
+  </swiper>
+
+  <view class="page-recommend">
+    <button class='bztj'>精品推荐</button>
+
+  <view class='hotgoodcontainer'>
+      <view class='gooditem' wx:for="{{recommend}}" wx:key="recommend" wx:for-index="idx" wx:for-item="good" bindtap="recommendGood" id="{{good.id}}">
+        <view class='imgview'>
+          <image class='productimg' src='{{good.url}}'/>
+        </view>
+        <view>{{good.title}}</view>
+        <view class='goodprice'>{{good.price}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="page-hotrec">
+    <button class='rxhw'>热销好物</button>
+      <view class='hotgoodcontainer'>
+      <view class='gooditem' wx:key="gooditem" wx:for="{{hotrec}}" wx:for-index="idx" wx:for-item="good" bindtap="hotrecGood" id="{{good.id}}">
+        <view class='imgview'>
+          <image class='productimg' src='{{good.url}}'/>
+        </view>
+        <view>{{good.title}}</view>
+        <view class='goodprice'>{{good.price}}</view>
+      </view>
+    </view>
+  </view>
+</view>
+
+
+
+
+<view class='video_container' hidden="{{flag_2}}">
+  <view class='type-item' wx:for="{{activity_1}}" wx:key="{{index}}" data-videoid="{{item.id}}">
+    <image class='type-img' src='{{item.img}}' mode='aspectFill' data-id="{{item.id}}" bindtap='typeHandler'></image>
+    <view class='title'>
+        <text>{{item.name}}</text>
+        <button class='btn' data-id="{{item.id}}" bindtap='typeHandler'>去体验</button>
+    </view>
+  </view>
+</view>
+
+<view class='video_container' hidden="{{flag_3}}">
+  <view class='type-item' wx:for="{{activity_2}}" wx:key="{{index}}" data-videoid="{{item.id}}">
+    <image class='type-img' src='{{item.img}}' mode='aspectFill' data-id="{{item.id}}"bindtap='typeHandler'></image>
+    <view class='title'>
+        <text>{{item.name}}</text>
+        <button class='btn' data-id="{{item.id}}" bindtap='typeHandler'>去体验</button>
+    </view>
+  </view>
+</view>
+
+
+<view class='video_container' hidden="{{flag_4}}">
+  <view class='type-item' wx:for="{{activity_3}}" wx:key="{{index}}" data-videoid="{{item.id}}">
+    <image class='type-img' src='{{item.img}}' mode='aspectFill' data-id="{{item.id}}" bindtap='typeHandler'></image>
+    <view class='title'>
+        <text>{{item.name}}</text>
+        <button class='btn' data-id="{{item.id}}" bindtap='typeHandler'>去体验</button>
+    </view>
+  </view>
+</view>
+
+<view class='video_container' hidden="{{flag_5}}">
+  <view class='type-item' wx:for="{{activity_4}}" wx:key="{{index}}" data-videoid="{{item.id}}">
+    <image class='type-img' src='{{item.img}}' mode='aspectFill' data-id="{{item.id}}" bindtap='typeHandler'></image>
+    <view class='title'>
+        <text>{{item.name}}</text>
+        <button class='btn' data-id="{{item.id}}" bindtap='typeHandler'>去体验</button>
+    </view>
+  </view>
+</view>
+
+<view class='video_container' hidden="{{flag_6}}">
+  <view class='type-item' wx:for="{{activity_5}}" wx:key="{{index}}" data-videoid="{{item.id}}">
+    <image class='type-img' src='{{item.img}}' mode='aspectFill' data-id="{{item.id}}" bindtap='typeHandler'></image>
+    <view class='title'>
+        <text>{{item.name}}</text>
+        <button class='btn' data-id="{{item.id}}" bindtap='typeHandler'>去体验</button>
+    </view>
+  </view>
+</view>
+
+<view class='video_container' hidden="{{flag_7}}">
+  <view class='type-item' wx:for="{{activity_6}}" wx:key="{{index}}" data-videoid="{{item.id}}">
+    <image class='type-img' src='{{item.img}}' mode='aspectFill' data-id="{{item.id}}" bindtap='typeHandler'></image>
+    <view class='title'>
+        <text>{{item.name}}</text>
+        <button class='btn' data-id="{{item.id}}" bindtap='typeHandler'>去体验</button>
+    </view>
+  </view>
+</view>

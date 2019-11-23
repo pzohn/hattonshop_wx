@@ -1,0 +1,258 @@
+.navbar{
+    width: 100%;
+    position:fixed;
+    z-index: 999;
+    top: 0;
+}
+.nav {
+    height: 80rpx;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+    line-height: 80rpx;
+    background: #f7f7f7;
+    font-size: 16px;
+    white-space: nowrap;
+    position: fixed;
+    top: 78rpx;
+    left: 0;
+    z-index: 99;
+}
+.nav-item {
+    width: 20%;
+    display: inline-block;
+    text-align: center;
+}
+.nav-item.active{
+    color: red;
+}
+
+/*搜索begin*/
+.search{
+  display: flex;
+  flex-direction: row;
+  width: 95%;
+  padding-bottom: 1px;
+  position: fixed;
+  top: 0rpx;
+  z-index: 99;
+  background: #f7f7f7;
+}
+.searchBg{
+  background-color:#f2f2f2;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 5px;
+  color: #999999;
+}
+.searchBg image{
+  margin-left: 5px;
+  margin-top:5px;
+}
+
+.search input{
+  height: 40px;
+  line-height: 40px;
+  font-size: 15px;
+  font-weight:200;
+}
+
+.btn1{
+  font-size: 18px;
+  font-weight:300;
+  line-height: 40px;
+  margin-left: 5%;
+  border:1px solid #3385ff;
+  width:30%;
+  text-align: center;
+  background-color: #3385ff;
+  border-radius: 5px;
+  color: #fff
+}
+/*搜索end*/
+
+
+.video_container{
+  padding: 180rpx 25rpx;
+}
+
+/*轮播begin*/
+.video_swiper{
+  padding: 180rpx 25rpx;
+}
+swiper,swiper-item
+{
+   margin:0;
+   padding: 0;
+}
+
+.lunbo,.lunbo image{height: 330rpx;}
+.lunbo .wx-swiper-dots.wx-swiper-dots-horizontal{
+      margin-bottom: 10rpx;
+}
+.lunbo .wx-swiper-dot{
+    width: 14rpx;
+    display: inline-flex;
+    height: 14rpx;
+    vertical-align: sub; 
+    margin-left: 10rpx;
+    margin-right: 10rpx;
+    background:rgba(255,255,255,.5);
+    border-radius: 100%;
+}
+.lunbo .wx-swiper-dot::before{
+     content: '';
+     flex-grow: 1;
+} 
+.lunbo .wx-swiper-dot-active::before{
+     content: '';
+     flex-grow: 1;
+     background:rgba(255,255,255,1);
+     border-radius: 100%;
+}
+
+.slide-image{
+  width: 100%;vertical-align: top;display: block;
+}
+/*轮播end*/
+.type-item{
+  border-radius: 10rpx;
+  position: relative;
+}
+
+.type-item + .type-item{
+  margin-top: 20rpx;
+}
+
+.type-img{
+  width: 100%;
+  height: 290rpx;
+  border-radius: 10rpx;
+  display: block;
+}
+
+.title{
+  display: flex;
+  flex-direction: row;
+  padding-top: 10px;
+}
+
+.title text{
+  left: 10rpx;
+  bottom: 20rpx;
+  color: black;
+  font-size: 28rpx;
+  font-weight: 500;
+  width: 74%;
+  padding-top: 5px;
+}
+
+.btn{
+  right: 10rpx;
+  width: 24%;
+  background:url('https://www.gfcamps.cn/images/wx_logo/tiyan.png') no-repeat center center;
+  background-size: cover;
+  height: 28px;
+  border-radius: 25rpx;
+  font-size: 14px;
+  text-align: center;
+  color: rgba(255,255,255,0);
+}
+
+
+
+
+
+.page-recommend .items-bottom{
+  width: 94%;
+  margin: 0 auto;
+  padding-top: 20rpx;
+  }
+.page-recommend .items-div{
+display: inline-block;
+width: 16%;
+margin-right: 3.5%;
+text-align: center;
+font-size: 24rpx;
+color: #222;
+}
+.page-recommend .items-div image{
+  height: 100rpx;
+  width: 100rpx;
+  }
+.page-recommend .items-div:last-child{
+  margin-right: 0;
+}
+.page-recommend .items-div .items-content{
+  margin-bottom: 20rpx;
+}
+
+.page-recommend {
+  margin-top: 20rpx;
+  background-color: #fff;
+  width: 100%;
+  display: block;
+}
+
+.recommend-bottom .recommend-content-price{
+  font-size: 28rpx;
+  display: block;
+  color: red;
+}
+
+.hotgoodcontainer{
+    display:flex;
+    flex-wrap: wrap;
+    width:100%;
+}
+.gooditem{
+    width:33.333333%;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    font-size:12px;
+    box-sizing:border-box;
+    border: 0.5px solid #f7f7f7;
+    padding-bottom:6px;
+}
+.productimg{
+   width:100%;
+   height:100%;
+}
+.imgview{
+  width:100%;
+  height:120px;
+}
+
+.bztj{
+  width: 60%;
+  background:url('https://www.gfcamps.cn/images/wx_logo/bztj1.png') no-repeat center center;
+  background-size: cover;
+  height: 50px;
+  border-radius: 25rpx;
+  font-size: 14px;
+  text-align: center;
+  color: rgba(255,255,255,0);
+  margin-bottom: 2%
+}
+
+.rxhw{
+  width: 60%;
+  background:url('https://www.gfcamps.cn/images/wx_logo/rxhw.png') no-repeat center center;
+  background-size: cover;
+  height: 50px;
+  border-radius: 25rpx;
+  font-size: 14px;
+  text-align: center;
+  color: rgba(255,255,255,0);
+  margin-bottom: 2%
+}
+
+.goodprice{
+  font-size: 25rpx;
+  color:orangered;
+}
