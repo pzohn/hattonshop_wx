@@ -18,7 +18,7 @@ Page({
     var page = this;
     var url = '';
     if (id == 1){
-      url = 'https://www.hattonstar.com/getOrderAll'
+      url = 'https://www.hattonstar.com/getOrderAllForPerson'
     } else if (id == 2){
       url = 'https://www.hattonstar.com/getOrderUnPay'
     } else if (id == 3) {
@@ -33,17 +33,18 @@ Page({
       },
       method: 'POST',
       success: function (res) {
+        console.log(res)
         var activity = [];
-        for (var index in res.data) {
+        for (var index in res.data.data) {
           var object = new Object();
-          object.count = res.data[index].count;
-          if (res.data[index].count == 1){
+          object.count = res.data.data[index].count;
+          if (res.data.data[index].count == 1){
             object.img = 'https://www.gfcamps.cn/images/' + res.data[index].detail[0].title_pic;
-            object.name = res.data[index].detail[0].name;
-            object.activity_id = res.data[index].detail[0].activity_id;
-            object.wx_id = res.data[index].detail[0].wx_id;
-            object.num = res.data[index].detail[0].num;
-            object.charge = res.data[index].detail[0].charge;
+            object.name = res.data.data[index].detail[0].name;
+            object.activity_id = res.data.data[index].detail[0].activity_id;
+            object.wx_id = res.data.data[index].detail[0].wx_id;
+            object.num = res.data.data[index].detail[0].num;
+            object.charge = res.data.data[index].detail[0].charge;
           }else{
             var detail = [];
             for (var i in res.data[index].detail){
