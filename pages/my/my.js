@@ -14,6 +14,34 @@ Page({
         "iconText": '宝宝信息',
         "id":1
       }
+    ],
+
+    tradeArray: [
+      {
+        "iconUrl": '../../images/qbdd.png',
+        "iconText": '全部订单',
+        "id": 10
+      },
+      {
+        "iconUrl": '../../images/dfk.png',
+        "iconText": '待付款',
+        "id": 11
+      },
+      {
+        "iconUrl": '../../images/dfh.png',
+        "iconText": '待发货',
+        "id": 21
+      },
+      {
+        "iconUrl": '../../images/dsh.png',
+        "iconText": '待收货',
+        "id": 31
+      },
+      {
+        "iconUrl": '../../images/ywc.png',
+        "iconText": '已完成',
+        "id": 41
+      }
     ]
   },
 
@@ -42,10 +70,18 @@ Page({
     }
   },
 
+  listNew: function (id) {
+    if (this.isLogin()) {
+      wx.navigateTo({
+        url: '../list/list?type=' + id
+      });
+    }
+  },
+
   collect () {
     if (this.isLogin()) {
       wx.request({
-        url: 'https://www.gfcamps.cn/getCollect',
+        url: 'https://www.hattonstar.com/getCollect',
         data: {
           phone: app.globalData.phone
         },
@@ -134,6 +170,16 @@ Page({
       wx.navigateTo({
         url: '../address/address'
       });
+    } else if (index == 10) {
+      this.listNew(0)
+    } else if (index == 11) {
+      this.listNew(1)
+    } else if (index == 21) {
+      this.listNew(2)
+    } else if (index == 31) {
+      this.listNew(3)
+    } else if (index == 41) {
+      this.listNew(4)
     }
   },
 

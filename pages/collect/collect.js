@@ -15,7 +15,7 @@ Page({
   initData: function (ids) {
     var page = this;
     wx.request({
-      url: 'https://www.gfcamps.cn/getCampactivitiesByCollect',
+      url: 'https://www.hattonstar.com/shoppingGetByCollect',
       data: {
         ids: ids
       },
@@ -24,7 +24,7 @@ Page({
         var activity = [];
         for (var index in res.data) {
           var object = new Object();
-          object.img = 'https://www.gfcamps.cn/images/' + res.data[index].title_pic;
+          object.img = 'https://www.hattonstar.com/storage/' + res.data[index].title_pic;
           object.name = res.data[index].name;
           object.id = res.data[index].id;
           object.activity_id = res.data[index].activity_id;

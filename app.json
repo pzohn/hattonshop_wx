@@ -1,7 +1,9 @@
 {
   "pages": [
-    "pages/index/index",
+    "pages/sharepage/sharepage",
+    "pages/phone/phone",
     "pages/getuser1/getuser1",
+    "pages/index/index",
     "pages/getuser/getuser",
     "pages/certmake/certmake",
     "pages/userinfo/userinfo",

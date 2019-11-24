@@ -47,7 +47,7 @@
     </view>
 </view>
  
-<view class="order_pay">
+<view class="order_pay" hidden="{{btn_hide}}">
     <view class="pay_money">付款 <text class="Total_price">￥{{total_price}}</text></view>
     <view class="close_order" bindtap="bindCloseOrder">关闭订单</view>
     <view class="submit_order" bindtap="bindSubmitOrder">继续支付</view>

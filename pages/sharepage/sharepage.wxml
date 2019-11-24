@@ -1,0 +1,22 @@
+<view class="container-box">
+  <view class="login">
+    <view><image src="/images/welcome.jpg" style="width:100%;height:200px;"></image></view>
+  </view>
+  <view class="img-box">
+      <image bindtap="previewImg" mode="scaleToFill" src="{{imagePath}}"></image>
+  </view>
+</view>
+<view hidden="{{maskHidden}}" class="mask"></view>
+<view class="canvas-box">
+  <canvas  hidden="{{canvasHidden}}" style="width: 686rpx;height: 686rpx;background:#f1f1f1;" canvas-id="mycanvas"/>
+</view>
+<view class="button">
+  <button class="btn" type="primary"  open-type="getuserinfo" bindtap="save">保存</button>
+</view>
+
+  <share-three
+    avatar='{{ shareThree.avatar }}'
+    nickname='{{ shareThree.nickname }}'
+    awardMoney='{{ shareThree.awardMoney }}'
+    showShareModel='{{ shareThree.showShareModel }}'
+  ></share-three>

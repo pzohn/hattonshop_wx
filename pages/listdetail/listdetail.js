@@ -26,7 +26,8 @@ Page({
     cart_ids: [], // 购物车商品id
     type: '',
     status: '',
-    page_id:0
+    page_id:0,
+    btn_hide:true
   },
 
   //  提交订单
@@ -40,11 +41,9 @@ Page({
   },
 
   typeHandler: function (e) {
-    console.log(e);
     var id = e.currentTarget.dataset.id;
-    var activity_id = e.currentTarget.dataset.activityid;
     wx.navigateTo({
-      url: '../detail/detail?id=' + id + '&activity_id=' + activity_id
+      url: '../detail/detail?id=' + id
     });
   },
 
@@ -60,7 +59,7 @@ Page({
               var code = res.code;
               if (code) {
                 wx.request({
-                  url: 'https://www.gfcamps.cn/onRePay',
+                  url: 'https://www.hattonstar.com/onRePay',
                   data: {
                     js_code: code,
                     trade_id: app.globalData.listdetail.trade_id
@@ -114,7 +113,7 @@ Page({
       success: function (res) {
         if (res.confirm) {
           wx.request({
-            url: 'https://www.gfcamps.cn/hideOrder',
+            url: 'https://www.hattonstar.com/hideOrder',
             data: {
               id: app.globalData.listdetail.trade_id
             },
@@ -162,8 +161,8 @@ Page({
    */
   onLoad: function (options) {
     var page_id = options.page_id;
+    var status = options.status;
     this.setData({ page_id: page_id});
-    console.log(app.globalData.listdetail);
     this.initAddr();
     this.initData();
   },
@@ -211,6 +210,10 @@ Page({
         total_price += object.price * object.count;
       }
     }
+    var status = app.globalData.listdetail.status;
+    if (status == '待付款'){
+      this.setData({btn_hide:false})
+    } 
     this.setData({
       goods_info: goods_info,
       total_price: total_price,

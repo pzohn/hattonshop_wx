@@ -17,14 +17,16 @@ Page({
   initData: function (id) {
     var page = this;
     var url = '';
-    if (id == 1){
+    if (id == 0){
       url = 'https://www.hattonstar.com/getOrderAllForPerson'
-    } else if (id == 2){
-      url = 'https://www.hattonstar.com/getOrderUnPay'
+    } else if (id == 1){
+      url = 'https://www.hattonstar.com/getOrderUnPayForPerson'
+    } else if (id == 2) {
+      url = 'https://www.hattonstar.com/getOrderUnsendForPerson'
     } else if (id == 3) {
-      url = 'https://www.hattonstar.com/getOrderUnUse'
+      url = 'https://www.hattonstar.com/getOrderUnreceiveForPerson'
     } else if (id == 4) {
-      url = 'https://www.hattonstar.com/getOrderUse'
+      url = 'https://www.hattonstar.com/getOrderFinishForPerson'
     } 
     wx.request({
       url: url,
@@ -33,39 +35,37 @@ Page({
       },
       method: 'POST',
       success: function (res) {
-        console.log(res)
         var activity = [];
         for (var index in res.data.data) {
           var object = new Object();
           object.count = res.data.data[index].count;
           if (res.data.data[index].count == 1){
-            object.img = 'https://www.gfcamps.cn/images/' + res.data[index].detail[0].title_pic;
+            object.img = 'https://www.hattonstar.com/storage/' + res.data.data[index].detail[0].title_pic;
             object.name = res.data.data[index].detail[0].name;
-            object.activity_id = res.data.data[index].detail[0].activity_id;
-            object.wx_id = res.data.data[index].detail[0].wx_id;
+            object.activity_id = res.data.data[index].detail[0].shopping_id;
             object.num = res.data.data[index].detail[0].num;
             object.charge = res.data.data[index].detail[0].charge;
           }else{
             var detail = [];
-            for (var i in res.data[index].detail){
+            for (var i in res.data.data[index].detail){
               var objectDetail = new Object();
-              objectDetail.img = 'https://www.gfcamps.cn/images/' + res.data[index].detail[i].title_pic;
-              objectDetail.activity_id = res.data[index].detail[i].activity_id;
-              objectDetail.wx_id = res.data[index].detail[i].wx_id;
-              objectDetail.num = res.data[index].detail[i].num;
-              objectDetail.name = res.data[index].detail[i].name;
-              objectDetail.charge = res.data[index].detail[i].charge;
+              objectDetail.img = 'https://www.hattonstar.com/storage/' + res.data.data[index].detail[i].title_pic;
+              objectDetail.activity_id = res.data.data[index].detail[i].shopping_id;
+              objectDetail.num = res.data.data[index].detail[i].num;
+              objectDetail.name = res.data.data[index].detail[i].name;
+              objectDetail.charge = res.data.data[index].detail[i].charge;
               detail[i] = objectDetail;
             }
             object.detail = detail;
           }
-          object.out_trade_no = res.data[index].out_trade_no;
-          object.status = res.data[index].status;
-          object.date = res.data[index].date;
-          object.color = res.data[index].color;
-          object.trade_id = res.data[index].trade_id;
-          object.address = res.data[index].address;
-          object.total_charge = res.data[index].charge;
+          object.out_trade_no = res.data.data[index].tradeid;
+          object.status = res.data.data[index].status;
+          object.date = res.data.data[index].time;
+          object.color = res.data.data[index].color;
+          object.trade_id = res.data.data[index].id;
+          object.address = res.data.data[index].address;
+          object.total_charge = res.data.data[index].charge;
+          console.log(object.status)
           if (object.status == '待付款'){
             object.payhide = false;
             object.deletehide = false;
@@ -96,10 +96,11 @@ Page({
   },
   
   gotoDetail(e){
+    var page = this
     var index = e.currentTarget.dataset.index;
     app.globalData.listdetail = this.data.activity[index];
-    wx.navigateTo({
-      url: '../listdetail/listdetail'
+    wx.redirectTo({
+      url: '../listdetail/listdetail?page_id=' + page.data.page_id
     });
   },
   /**
@@ -118,7 +119,7 @@ Page({
       success: function (res) {
         if (res.confirm) {
           wx.request({
-            url: 'https://www.gfcamps.cn/hideOrder',
+            url: 'https://www.hattonstar.com/hideOrder',
             data: {
               id: id
             },
@@ -168,7 +169,7 @@ Page({
               var code = res.code;
               if (code) {
                 wx.request({
-                  url: 'https://www.gfcamps.cn/onRePay',
+                  url: 'https://www.hattonstar.com/onRePay',
                   data: {
                     js_code: code,
                     trade_id: id
