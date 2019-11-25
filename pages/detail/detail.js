@@ -274,6 +274,12 @@ Page({
     })
   },
 
+  poster() {
+    wx.navigateTo({
+      url: '../sharepage/sharepage',
+    })
+  },
+  
   clickTab: function (e) {
     var that = this;
     if (this.data.currentTab === e.target.dataset.current) {

@@ -110,30 +110,46 @@ Page({
       flag_1: false
     });
 
-    this.initData1(1, 1);
-    this.initData2();
+    this.initData1();
   },
 
-  initData1: function (id, activity_id) {
+  initData1: function () {
     var page = this;
     wx.request({
-      url: 'https://www.gfcamps.cn/getWxInfoById',
+      url: 'https://www.hattonstar.com/getIndexset',
       data: {
-        id: id,
-        activity_id: activity_id
       },
       method: 'POST',
       success: function (res) {
         var imgUrls = [];
-        for (var i in res.data.swiper_pics) {
+        for (var i in res.data.lunbo) {
           var object = new Object();
-          object = 'https://www.gfcamps.cn/images/' + res.data.swiper_pics[i];
-          console.log(object);
+          object.url = 'https://www.hattonstar.com/storage/' + res.data.lunbo[i].title_pic;
+          object.link = '../detail/detail?id=' + res.data.lunbo[i].id;
           imgUrls[i] = object;
         }
+        var recommend = [];
+        for (var i in res.data.good) {
+          var object = new Object();
+          object.url = 'https://www.hattonstar.com/storage/' + res.data.good[i].title_pic;
+          object.title = res.data.good[i].name;
+          object.price = res.data.good[i].price + '元';
+          object.id = res.data.good[i].id;
+          recommend[i] = object;
+        }
+        var hotrec = [];
+        for (var i in res.data.week) {
+          var object = new Object();
+          object.url = 'https://www.hattonstar.com/storage/' + res.data.week[i].title_pic;
+          object.title = res.data.week[i].name;
+          object.price = res.data.week[i].price + '元';
+          object.id = res.data.week[i].id;
+          hotrec[i] = object;
+        }
         page.setData({
-          title: res.data.name,
-          imgUrls: imgUrls
+          imgUrls: imgUrls,
+          recommend: recommend,
+          hotrec: hotrec
         });
       },
       fail: function (res) {
@@ -214,31 +230,27 @@ Page({
     })
   },
 
-  initData2: function () {
-    var page = this;
-    var recommend = [];
-    var hotrec = [];
-    for (let i = 0; i < 6; ++i) {
-      var object = new Object();
-      object.url = 'https://www.gfcamps.cn/images/lunbo/guanniao.jpg';
-      object.title = '胡斌';
-      object.price = 12 + '元/天';
-      object.id = i;
-      recommend[i] = object;
-      hotrec[i] = object;
-    }
-    page.setData({
-      recommend: recommend,
-      hotrec: hotrec
-    });
-  },
-
   typeHandler: function (e) {
     var id = e.currentTarget.dataset.id;
     wx.navigateTo({
       url: '../detail/detail?id=' + id
     });
   },
+
+  recommendGood: function (e) {
+    var id = e.currentTarget.id;
+    wx.navigateTo({
+      url: '../detail/detail?id=' + id
+    });
+  },
+
+  hotrecGood: function (e) {
+    var id = e.currentTarget.id;
+    wx.navigateTo({
+      url: '../detail/detail?id=' + id
+    });
+  },
+
 
   switchNav(event) {
     var cur = event.currentTarget.dataset.current;
@@ -256,6 +268,31 @@ Page({
       })
     }
   },
+
+  accountInput: function (e) {
+    var content = e.detail.value;
+    this.setData({ name: content });
+  },
+
+  resetSearch: function () {
+    var name = this.data.name;
+    if (this.data.name == '') {
+      wx.showModal({
+        title: '搜索条件为空',
+        content: '请输入关键字!',
+        showCancel: false,
+        success: function (res) {
+          if (res.confirm) {
+          }
+        }
+      });
+      return;
+    }
+    wx.navigateTo({
+      url: '../search/search?name=' + name
+    });
+  },
+  
   switchTab(event) {
     var cur = event.detail.current;
     var singleNavWidth = this.data.windowWidth / 5;
@@ -266,7 +303,6 @@ Page({
 
     var page = this;
     var id = cur + 1;
-    console.log(event);
     if (id == 1) {
       page.setData({
         flag_1: false, flag_2: true, flag_3: true, flag_4: true, flag_5: true, currentTab: id - 1

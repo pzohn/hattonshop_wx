@@ -65,6 +65,10 @@
     <image bindtap="home" src="../../images/home.png"/>
     <text>首页</text>
   </view>
+  <view class='detail-nav-view'>
+    <image bindtap="poster" src="../../images/haibao.png"/>
+    <text>生成海报</text>
+  </view>
   <view class="line_nav"></view>
   <view class='detail-nav-view'>
     <image bindtap="collect" src="{{collect_url}}" />

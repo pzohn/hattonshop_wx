@@ -175,9 +175,9 @@ view .text:first-of-type {
 }
 
 .detail-nav image {
-  width: 60rpx;
-  height: 60rpx;
-  margin: 5rpx 40rpx;
+  width: 50rpx;
+  height: 50rpx;
+  margin: 1rpx 40rpx;
 }
 .line_nav {
   width: 5rpx;

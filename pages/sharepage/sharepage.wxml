@@ -1,7 +1,4 @@
 <view class="container-box">
-  <view class="login">
-    <view><image src="/images/welcome.jpg" style="width:100%;height:200px;"></image></view>
-  </view>
   <view class="img-box">
       <image bindtap="previewImg" mode="scaleToFill" src="{{imagePath}}"></image>
   </view>

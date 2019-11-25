@@ -5,7 +5,14 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     hide:true
   },
-  onLoad: function () {
+  onLoad: function (options) {
+    // var str = options.shareId + ""
+    // wx.showToast({
+    //   title: str,
+    //   icon: 'none',
+    //   duration: 100000
+    // })
+    console.log(options);
     var that = this;
     var wxUserInfo = wx.getStorageSync('wxUserInfo');
     if (wxUserInfo == "") {

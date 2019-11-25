@@ -21,7 +21,7 @@ Page({
     var initUrl;
     if (options.phone == undefined) {
       initUrl = options.postid + "";
-      initUrl = "https://www.hattonstar.com/b?postid=" + initUrl;
+      initUrl = "https://www.hattonstar.com/d?shareId=1618";// + initUrl
     } else {
       initUrl = options.phone + "";
     }
@@ -133,7 +133,7 @@ Page({
         var tempFilePaths = res.tempFilePaths;
         wx.saveFile({
           tempFilePath: tempFilePaths[0],
-          success: function (res) {
+          success: function (res) { 
             var saveFilePath = res.savedFilePath;
           }
         })
