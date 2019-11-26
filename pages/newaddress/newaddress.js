@@ -32,7 +32,7 @@ Page({
     wx.request({
       url: 'https://www.hattonstar.com/insertAddress',
       data: {
-        login_id: app.globalData.login_id,
+        login_id: app.globalData.wx_id,
         name: page.data.name,
         phone: page.data.phone,
         province: page.data.region[0],
@@ -43,9 +43,14 @@ Page({
       },
       method: 'POST',
       success: function (res) {
+        if (page.data.type == 100) {
+          wx.switchTab({
+            url: '../my/my'
+          })
+        } else {
         wx.redirectTo({
           url: '../certmake/certmake?id=' + page.data.detail_id + '&type=' + page.data.type + '&num=' + page.data.count
-        })
+        })}
       },
       fail: function (res) {
         wx.showModal({

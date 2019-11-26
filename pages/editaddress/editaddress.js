@@ -44,9 +44,15 @@ Page({
       },
       method: 'POST',
       success: function (res) {
-        wx.redirectTo({
-          url: '../certmake/certmake?id=' + page.data.detail_id + '&type=' + page.data.type + '&num=' + page.data.count
-        })
+        if (page.data.type == 100) {
+          wx.switchTab({
+            url: '../my/my'
+          })
+        }else {
+          wx.redirectTo({
+            url: '../certmake/certmake?id=' + page.data.detail_id + '&type=' + page.data.type + '&num=' + page.data.count
+          })
+        }
       },
       fail: function (res) {
         wx.showModal({
@@ -74,10 +80,14 @@ Page({
       },
       method: 'POST',
       success: function (res) {
-        console.log("res")
+        if (page.data.type == 100) {
+          wx.switchTab({
+            url: '../my/my'
+          })
+        } else {
         wx.redirectTo({
           url: '../certmake/certmake?id=' + page.data.detail_id + '&type=' + page.data.type + '&num=' + page.data.count
-        })
+        })}
       },
       fail: function (res) {
         wx.showModal({

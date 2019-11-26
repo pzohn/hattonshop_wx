@@ -125,14 +125,13 @@ Page({
 
   onItemClick: function (e) {
     var index = e.currentTarget.id;
+    var that = this;
     if (index == 1){
       wx.navigateTo({
         url: '../userinfo/userinfo'
       })
     } else if (index == 2){
-      wx.navigateTo({
-        url: '../address/address'
-      });
+      that.onAddress();
     } else if (index == 10) {
       this.listNew(0)
     } else if (index == 11) {
@@ -144,6 +143,38 @@ Page({
     } else if (index == 41) {
       this.listNew(4)
     }
+  },
+
+  address: function () {
+    wx.request({
+      url: 'https://www.hattonstar.com/getAddressByLoginId',
+      data: {
+        login_id: app.globalData.wx_id
+      },
+      method: 'POST',
+      success: function (res) {
+        if (res.data == 0) {
+          wx.navigateTo({
+            url: '../newaddress/newaddress?detail_id=' + 0 + '&type=' + 100 + '&count=' + 0
+          })
+        } else {
+          wx.navigateTo({
+            url: '../editaddress/editaddress?id=' + res.data.id + '&detail_id=' + 0 + '&type=' + 100 + '&count=' + 0
+          })
+        }
+      },
+      fail: function (res) {
+        wx.showModal({
+          title: '错误提示',
+          content: '服务器无响应，请联系工作人员!',
+          success: function (res) {
+            if (res.confirm) {
+            } else if (res.cancel) {
+            }
+          }
+        })
+      }
+    })
   },
 
   onLoad: function (options) {
