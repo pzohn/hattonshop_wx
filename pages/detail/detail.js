@@ -45,13 +45,6 @@ Page({
   },
 
   onLoad: function (options) {
-    var loginCode = wx.getStorageSync('phone');
-    if (loginCode == "") {
-      app.globalData.loginFlag = false;
-    } else {
-      app.globalData.loginFlag = true;
-      app.globalData.phone = loginCode;
-    }
     var id = options.id;
     this.setData({ 
       detail_id:id
@@ -120,35 +113,33 @@ Page({
   // 收藏
   collect: function () {
     var page = this;
-    if (page.isLogin()){
-      wx.request({
-        url: 'https://www.hattonstar.com/collect',
-        data: {
-          phone: app.globalData.phone,
-          detail_id: page.data.detail_id,
-          collect_flag: !page.data.iscollect
-        },
-        method: 'POST',
-        success: function (res) {
-          console.log(res.data)
-          page.setData({
-            iscollect: res.data,
-          });
-          page.initCollectUrl();
-        },
-        fail: function (res) {
-          wx.showModal({
-            title: '错误提示',
-            content: '服务器无响应，请联系工作人员!',
-            success: function (res) {
-              if (res.confirm) {
-              } else if (res.cancel) {
-              }
+    wx.request({
+      url: 'https://www.hattonstar.com/collect',
+      data: {
+        wx_id: app.globalData.wx_id,
+        detail_id: page.data.detail_id,
+        collect_flag: !page.data.iscollect
+      },
+      method: 'POST',
+      success: function (res) {
+        console.log(res.data)
+        page.setData({
+          iscollect: res.data,
+        });
+        page.initCollectUrl();
+      },
+      fail: function (res) {
+        wx.showModal({
+          title: '错误提示',
+          content: '服务器无响应，请联系工作人员!',
+          success: function (res) {
+            if (res.confirm) {
+            } else if (res.cancel) {
             }
-          })
-        }
-      })
-    }
+          }
+        })
+      }
+    })
   },
 
   initCollect: function () {
@@ -204,67 +195,43 @@ Page({
     }
   },
 
-  isLogin() {
-    if (app.globalData.loginFlag == false) {
-      wx.showModal({
-        title: '错误提示',
-        content: '用户登录,请登录!',
-        confirmText: '登录',
-        success: function (res) {
-          if (res.confirm) {
-            wx.navigateTo({
-              url: '../phonelogin/phonelogin',
-            })
-          }
-        }
-      })
-      return false;
-    }
-    return true;
-  },
-
   buttonOk() {
     var page = this;
-    if (page.isLogin()){
-      if (page.data.buy_flag == true) {
-        wx.navigateTo({
-          url: '../certmake/certmake?type=trade' + '&id=' + page.data.detail_id + '&num=' + page.data.num
-        })
-      } else {
-        console.log(app.globalData.phone)
-        console.log(page.data.detail_id)
-        console.log(page.data.num)
-        wx.request({
-          url: 'https://www.hattonstar.com/certInsert',
-          data: {
-            username: app.globalData.phone,
-            id: page.data.detail_id,
-            count: page.data.num
-          },
-          method: 'POST',
-          success: function (res) {
-            page.setData({
-              showModalStatus: false
-            })
-            wx.showToast({
-              title: '加入成功',
-              icon: 'success',
-              duration: 2000
-            });
-          },
-          fail: function (res) {
-            wx.showModal({
-              title: '错误提示',
-              content: '服务器无响应，请联系工作人员!',
-              success: function (res) {
-                if (res.confirm) {
-                } else if (res.cancel) {
-                }
+    if (page.data.buy_flag == true) {
+      wx.navigateTo({
+        url: '../certmake/certmake?type=trade' + '&id=' + page.data.detail_id + '&num=' + page.data.num
+      })
+    } else {
+      wx.request({
+        url: 'https://www.hattonstar.com/certInsert',
+        data: {
+          wx_id: app.globalData.wx_id,
+          id: page.data.detail_id,
+          count: page.data.num
+        },
+        method: 'POST',
+        success: function (res) {
+          page.setData({
+            showModalStatus: false
+          })
+          wx.showToast({
+            title: '加入成功',
+            icon: 'success',
+            duration: 2000
+          });
+        },
+        fail: function (res) {
+          wx.showModal({
+            title: '错误提示',
+            content: '服务器无响应，请联系工作人员!',
+            success: function (res) {
+              if (res.confirm) {
+              } else if (res.cancel) {
               }
-            })
-          }
-        })
-      }
+            }
+          })
+        }
+      })
     }
   },
 

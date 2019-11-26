@@ -67,7 +67,7 @@
   </view>
   <view class='detail-nav-view'>
     <image bindtap="poster" src="../../images/haibao.png"/>
-    <text>生成海报</text>
+    <text>分享</text>
   </view>
   <view class="line_nav"></view>
   <view class='detail-nav-view'>

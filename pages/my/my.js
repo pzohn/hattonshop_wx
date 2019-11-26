@@ -71,71 +71,48 @@ Page({
   },
 
   listNew: function (id) {
-    if (this.isLogin()) {
-      wx.navigateTo({
-        url: '../list/list?type=' + id
-      });
-    }
+    wx.navigateTo({
+      url: '../list/list?type=' + id
+    });
   },
 
   collect () {
-    if (this.isLogin()) {
-      wx.request({
-        url: 'https://www.hattonstar.com/getCollect',
-        data: {
-          phone: app.globalData.phone
-        },
-        method: 'POST',
-        success: function (res) {
-          if (res.data != 0) {
-            wx.navigateTo({
-              url: '../collect/collect?ids=' + res.data
-            });
-          } else {
-            wx.showModal({
-              title: '收藏夹为空',
-              content: '收藏夹为空!',
-              showCancel: false,
-              success: function (res) {
-                if (res.confirm) {
-                }
-              }
-            });
-            return;
-          }
-        },
-        fail: function (res) {
+    wx.request({
+      url: 'https://www.hattonstar.com/getCollect',
+      data: {
+        wx_id: app.globalData.wx_id
+      },
+      method: 'POST',
+      success: function (res) {
+        if (res.data != 0) {
+          wx.navigateTo({
+            url: '../collect/collect?ids=' + res.data
+          });
+        } else {
           wx.showModal({
-            title: '错误提示',
-            content: '服务器无响应，请联系工作人员!',
+            title: '收藏夹为空',
+            content: '收藏夹为空!',
             showCancel: false,
             success: function (res) {
               if (res.confirm) {
               }
             }
-          })
+          });
+          return;
         }
-      })
-    }
-  },
-
-  isLogin() {
-    if (app.globalData.loginFlag == false) {
-      wx.showModal({
-        title: '错误提示',
-        content: '用户登录,请登录!',
-        confirmText: '登录',
-        success: function (res) {
-          if (res.confirm) {
-            wx.navigateTo({
-              url: '../phonelogin/phonelogin',
-            })
+      },
+      fail: function (res) {
+        wx.showModal({
+          title: '错误提示',
+          content: '服务器无响应，请联系工作人员!',
+          showCancel: false,
+          success: function (res) {
+            if (res.confirm) {
+            }
           }
-        }
-      })
-      return false;
-    }
-    return true;
+        })
+      }
+    })
   },
 
   authorize: function () {
@@ -146,21 +123,7 @@ Page({
     }
   },
 
-  login: function () {
-    if (app.globalData.loginFlag == false) {
-      wx.navigateTo({
-        url: '../login/login'
-      });
-    }
-  },
-
   onItemClick: function (e) {
-    if (app.globalData.loginFlag == false) {
-      wx.navigateTo({
-        url: '../login/login'
-      });
-      return;
-    }
     var index = e.currentTarget.id;
     if (index == 1){
       wx.navigateTo({
@@ -196,16 +159,6 @@ Page({
     }
   },
 
-  loadCoupon: function () {
-    if (app.globalData.loginFlag == false) {
-      wx.navigateTo({
-        url: '../login/login'
-      });
-      return;
-    }
-    this.collect();
-  },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -217,10 +170,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    if (app.globalData.loginFlag == true){
-      this.setData({ phone: app.globalData.phone });
-    }
-
     var wxUserInfo = wx.getStorageSync('wxUserInfo');
     if (wxUserInfo == "") {
       app.globalData.authorizeFlag = false;

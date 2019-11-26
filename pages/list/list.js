@@ -31,7 +31,7 @@ Page({
     wx.request({
       url: url,
       data: {
-        phone: app.globalData.phone
+        wx_id: app.globalData.wx_id
       },
       method: 'POST',
       success: function (res) {

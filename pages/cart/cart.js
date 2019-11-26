@@ -29,14 +29,6 @@ Page({
   },
 
   onLoad: function (options) {
-    var app = getApp();
-    var loginCode = wx.getStorageSync('phone');
-    if (loginCode == "") {
-      app.globalData.loginFlag = false;
-    } else {
-      app.globalData.loginFlag = true;
-      app.globalData.phone = loginCode;
-    }
   },
 
   initData: function () {
@@ -44,11 +36,10 @@ Page({
     wx.request({
       url: 'https://www.hattonstar.com/certsSelect',
       data: {
-        username: app.globalData.phone
+        wx_id: app.globalData.wx_id
       },
       method: 'POST',
       success: function (res) {
-        console.log(res);
         var list = [];
         for (var i in res.data) {
           var object = new Object();

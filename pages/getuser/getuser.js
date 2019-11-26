@@ -1,4 +1,5 @@
 // pages/test/test.js
+var app = getApp();
 Page({
 
   /**
@@ -16,14 +17,26 @@ Page({
   },
 
   onGotUserInfo(e) {
-    console.log(e);
     var wxUserInfo = new Object();
     wxUserInfo.nickName = e.detail.userInfo.nickName;
     wxUserInfo.avatarUrl = e.detail.userInfo.avatarUrl;
-    wx.setStorageSync('wxUserInfo', wxUserInfo);
-    wx.navigateBack({
-      delta: 1
-    });
+    wx.request({
+      url: 'https://www.hattonstar.com/updateWxBaseInfo',
+      data: {
+        id: app.globalData.wx_id,
+        nikename: e.detail.userInfo.nickName,
+        url: e.detail.userInfo.avatarUrl
+      },
+      method: 'POST',
+      success: function (res) {
+        wx.setStorageSync('wxUserInfo', wxUserInfo);
+        wx.navigateBack({
+          delta: 1
+        });
+      },
+      fail: function (res) {
+      }
+    })
   },
 
   /**

@@ -94,11 +94,5 @@
     <view class="line"></view>
     <view class="hr"></view>
   </view>
-  <!-- <view class="item" bindtap="loadCoupon">
-    <view class="name">我的收藏</view>
-    <view class="detail">
-      <text>></text>
-    </view>
-  </view> -->
   <view class="line"></view>
 </view>

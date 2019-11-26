@@ -88,6 +88,7 @@ Page({
 
   dealTrade() {
     var page = this;
+    var wxUserInfo = wx.getStorageSync('wxUserInfo');
     wx.login({
       success: res => {
         var code = res.code;
@@ -97,9 +98,10 @@ Page({
             data: {
               js_code: code,
               detail_id: page.data.detail_id,
-              phone: app.globalData.phone,
+              wx_id: app.globalData.wx_id,
               num: page.data.goods_count,
-              address_id: page.data.address_id
+              address_id: page.data.address_id,
+              name: wxUserInfo.nickName
             },
             method: 'POST',
             success: function (res) {
@@ -133,7 +135,7 @@ Page({
 
   dealCert() {
     this.delCerts(app.globalData.certlist);
-
+    var wxUserInfo = wx.getStorageSync('wxUserInfo');
     var certInfo = '';
     for (var index in app.globalData.certlist) {
       certInfo += app.globalData.certlist[index].shoppingid + ',' + app.globalData.certlist[index].num;
@@ -157,10 +159,11 @@ Page({
             data: {
               js_code: code,
               certInfo: certInfo,
-              phone: app.globalData.phone,
+              wx_id: app.globalData.wx_id,
               address_id: page.data.address_id,
               charge: page.data.total_price,
-              body: body
+              body: body,
+              name: wxUserInfo.nickName
             },
             method: 'POST',
             success: function (res) {
@@ -227,7 +230,7 @@ Page({
       url: 'https://www.hattonstar.com/makeTrades',
       data: {
         id: id,
-        login_id: app.globalData.login_id
+        login_id: app.globalData.wx_id
       },
       method: 'POST',
       success: function (res) {
@@ -298,7 +301,7 @@ Page({
     wx.request({
       url: 'https://www.hattonstar.com/getAddress',
       data: {
-        login_id: app.globalData.login_id
+        login_id: app.globalData.wx_id
       },
       method: 'POST',
       success: function (res) {
