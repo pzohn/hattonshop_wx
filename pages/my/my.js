@@ -8,12 +8,18 @@ Page({
     phone:'未登录',
     nickName:'未授权',
     avatarUrl:'',
+    wx_id:0,
     iconArray: [
       {
         "iconUrl": 'https://www.hattonstar.com/gfcamp/info.png',
         "iconText": '宝宝信息',
         "id":1
-      }
+      },
+      {
+        "iconUrl": '../../images/myaddress.png',
+        "iconText": '收获地址',
+        "id": 2
+      },
     ],
 
     tradeArray: [
@@ -145,7 +151,7 @@ Page({
     }
   },
 
-  address: function () {
+  onAddress: function () {
     wx.request({
       url: 'https://www.hattonstar.com/getAddressByLoginId',
       data: {
@@ -178,6 +184,7 @@ Page({
   },
 
   onLoad: function (options) {
+    this.setData({ wx_id: app.globalData.wx_id})
     var wxUserInfo = wx.getStorageSync('wxUserInfo');
     if (wxUserInfo == ""){
       app.globalData.authorizeFlag = false;

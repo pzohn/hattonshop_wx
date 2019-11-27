@@ -75,7 +75,7 @@
     </view>
     <view class="line"></view>
     <view class="hr"></view>
-
+<!-- 
       <view class="item" bindtap="address">
       <view class="name">收货地址</view>
       <view class="detail">
@@ -83,16 +83,26 @@
       </view>
     </view>
     <view class="line"></view>
-    <view class="hr"></view>
+    <view class="hr"></view> -->
 
-      <view class="item" bindtap="service">
-      <view class="name">联系客服</view>
+    <view class="item" bindtap="service">
+      <view class="name">我的ID</view>
       <view class="detail">
-        <text>></text>
+        <text>{{wx_id}}</text>
       </view>
     </view>
     <view class="line"></view>
     <view class="hr"></view>
+
+    <button class="itembtn" open-type="contact">
+      <view class="btn_name">联系客服</view>
+      <view class="detail">
+        <text>></text>
+      </view>
+    </button>
+    <view class="line"></view>
+    <view class="hr"></view>
+
   </view>
   <view class="line"></view>
 </view>

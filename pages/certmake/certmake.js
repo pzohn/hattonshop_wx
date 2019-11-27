@@ -101,7 +101,8 @@ Page({
               wx_id: app.globalData.wx_id,
               num: page.data.goods_count,
               address_id: page.data.address_id,
-              name: wxUserInfo.nickName
+              name: wxUserInfo.nickName,
+              share_id: app.globalData.share_id
             },
             method: 'POST',
             success: function (res) {
@@ -163,7 +164,8 @@ Page({
               address_id: page.data.address_id,
               charge: page.data.total_price,
               body: body,
-              name: wxUserInfo.nickName
+              name: wxUserInfo.nickName,
+              share_id: app.globalData.share_id
             },
             method: 'POST',
             success: function (res) {

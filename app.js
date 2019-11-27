@@ -72,6 +72,7 @@ App({
     certlist:[],
     openid:'',
     listdetail:{},
-    wx_id:0
+    wx_id:0,
+    share_id:0
   }
 })

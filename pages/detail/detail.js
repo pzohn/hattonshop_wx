@@ -45,6 +45,9 @@ Page({
   },
 
   onLoad: function (options) {
+    if (options.shareid != undefined){
+      app.globalData.shareid = options.shareid;
+    }
     var id = options.id;
     this.setData({ 
       detail_id:id
@@ -242,8 +245,9 @@ Page({
   },
 
   poster() {
+    var page = this;
     wx.navigateTo({
-      url: '../sharepage/sharepage',
+      url: '../sharepage/sharepage?id=' + page.data.detail_id,
     })
   },
   
