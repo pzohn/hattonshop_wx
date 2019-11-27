@@ -12,12 +12,12 @@ Page({
     iconArray: [
       {
         "iconUrl": 'https://www.hattonstar.com/gfcamp/info.png',
-        "iconText": '宝宝信息',
+        "iconText": '个人信息',
         "id":1
       },
       {
         "iconUrl": '../../images/myaddress.png',
-        "iconText": '收获地址',
+        "iconText": '收货地址',
         "id": 2
       },
     ],
@@ -67,14 +67,6 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  list: function(e) {
-    if (this.isLogin()) {
-      var id = e.currentTarget.id;
-      wx.navigateTo({
-        url: '../list/list?type=' + id
-      });
-    }
-  },
 
   listNew: function (id) {
     wx.navigateTo({
@@ -186,7 +178,7 @@ Page({
   onLoad: function (options) {
     this.setData({ wx_id: app.globalData.wx_id})
     var wxUserInfo = wx.getStorageSync('wxUserInfo');
-    if (wxUserInfo == ""){
+    if (wxUserInfo.nickName == undefined){
       app.globalData.authorizeFlag = false;
     }else{
       this.setData({
@@ -209,7 +201,7 @@ Page({
    */
   onShow: function () {
     var wxUserInfo = wx.getStorageSync('wxUserInfo');
-    if (wxUserInfo == "") {
+    if (wxUserInfo.nickName == undefined) {
       app.globalData.authorizeFlag = false;
     } else {
       this.setData({

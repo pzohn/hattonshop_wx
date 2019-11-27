@@ -62,13 +62,14 @@ Page({
       return;
     }
     wx.request({
-      url: 'https://www.gfcamps.cn/memberUpdate',
+      url: 'https://www.hattonstar.com/memberUpdate',
       data: {
         name: e.detail.value.name,
         age: e.detail.value.age,
         email: e.detail.value.email,
-        phone: app.globalData.phone,
-        sex: e.detail.value.sex
+        phone: e.detail.value.phone,
+        sex: e.detail.value.sex,
+        wx_id: app.globalData.wx_id
       },
       method: 'POST',
       success: function (res) {
@@ -102,9 +103,9 @@ Page({
   initData: function () {
     var page = this;
     wx.request({
-      url: 'https://www.gfcamps.cn/memberSelect',
+      url: 'https://www.hattonstar.com/memberSelect',
       data: {
-        phone: app.globalData.phone
+        wx_id: app.globalData.wx_id
       },
       method: 'POST',
       success: function (res) {
