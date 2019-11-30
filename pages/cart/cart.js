@@ -430,11 +430,13 @@ Page({
     // 声明一个变量接收数组列表price
     let total = 0;
     // 循环列表得到每个数据
+    let total_num = 0;
     for (let i = 0; i < list.length; i++) {
       // 判断选中计算价格
       if (list[i].selected) {
         // 所有价格加起来 count_money
         total += list[i].num * list[i].price;
+        total_num += list[i].num
       }
     }
     // 最后赋值到data中渲染到页面
@@ -442,6 +444,18 @@ Page({
       list: list,
       totalPrice: total.toFixed(2)
     });
+
+    if (total_num) {
+      var numString = total_num + "";
+      wx.setTabBarBadge({
+        index: 1,
+        text: numString
+      })
+    } else {
+    wx.removeTabBarBadge({
+      index: 1,
+    })
+  }
   },
   // 下拉刷新
   // onPullDownRefresh: function () {

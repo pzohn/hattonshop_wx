@@ -72,6 +72,18 @@ Page({
   },
   //  提交订单
   bindSubmitOrder: function (e) {
+    if (this.data.hasAddr == 0) {
+      wx.showModal({
+        title: '错误提示',
+        content: '没有选择地址，请完善!',
+        success: function (res) {
+          if (res.confirm) {
+          } else if (res.cancel) {
+          }
+        }
+      })
+      return
+    }
     if (this.data.type == 'trade'){
       this.dealTrade()
     } else if (this.data.type == 'cert'){
@@ -300,6 +312,12 @@ Page({
       goods_info[index] = object;
       total_price += object.price * object.count;
     }
+    if (app.globalData.certlist.length) {
+      page.setData({
+        goods_info: goods_info,
+        total_price: total_price
+      });
+    }
     wx.request({
       url: 'https://www.hattonstar.com/getAddress',
       data: {
@@ -322,11 +340,8 @@ Page({
           page.setData({
             address_info: address_info,
             hasAddr: true,
-            address_id: object.id,
-            goods_info: goods_info,
-            total_price: total_price
+            address_id: object.id
           });
-
         } else {
           page.setData({
             hasAddr: false

@@ -53,6 +53,11 @@ Page({
     recommend: [],
     hotrec: []
   },
+
+  onShow: function () {
+    this.initCert();
+  },
+
   //事件处理函数
   onLoad: function () {
     if (app.globalData.userInfo) {
@@ -78,7 +83,6 @@ Page({
         }
       })
     }
-
 
     wx.getSystemInfo({
       success: (res) => {
@@ -251,7 +255,6 @@ Page({
     });
   },
 
-
   switchNav(event) {
     var cur = event.currentTarget.dataset.current;
     //每个tab选项宽度占1/5
@@ -293,6 +296,33 @@ Page({
     });
   },
   
+  initCert: function () {
+    var that = this;
+    wx.request({
+      url: 'https://www.hattonstar.com/getCertsNum',
+      data: {
+        wx_id: app.globalData.wx_id
+      },
+      method: 'POST',
+      success: function (res) {
+        var num = res.data;
+        if (num) {
+          var numString = num + ""
+          wx.setTabBarBadge({
+            index: 1,
+            text: numString
+          })
+        } else {
+          wx.removeTabBarBadge({
+            index: 1,
+          })
+        }
+      },
+      fail: function (res) {
+      }
+    })
+  },
+
   switchTab(event) {
     var cur = event.detail.current;
     var singleNavWidth = this.data.windowWidth / 5;

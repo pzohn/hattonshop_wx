@@ -263,7 +263,6 @@ Page({
   },
 
   filter: function (e) {
-    //console.log(e);
     var self = this, id = e.currentTarget.dataset.id, txt = e.currentTarget.dataset.txt, price = e.currentTarget.dataset.price
     self.setData({
       gg_id: id,

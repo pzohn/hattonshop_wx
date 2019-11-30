@@ -21,8 +21,8 @@
         <!-- 规格 -->
         <text class="cart_g_name">规格 : {{item.pro_name}}</text>
         <!-- 收藏 -->
-        <label class='collert' bindtap='btn_collert'>
-          <image class='collert_img'src='../../images/collect.png'></image> 收藏</label>
+        <!-- <label class='collert' bindtap='btn_collert'>
+          <image class='collert_img'src='../../images/collect.png'></image> 收藏</label> -->
         <!-- 价格 -->
         <text class="list_price">￥{{item.price}}</text>
         <!-- 商品数量加减  style='display:{{show_edit}}'-->
