@@ -87,8 +87,8 @@ Component({
     detailStr: {
       invite: '学海无涯苦作舟',
       nickInvite: '蹦萨卡拉卡',
-      bpbMini: '小鹿哈顿的声音邮局',
-      clickToMini: '(识别二维码收听)',
+      bpbMini: '哈顿星球_欢乐购',
+      clickToMini: '(识别二维码分享)',
       awardContent: '我在北方的寒夜里四季如春'
     },
     awardStr: '你在南方的艳阳里',
@@ -116,8 +116,7 @@ Component({
       },
     })
     wx.getImageInfo({
-      // src: app.globalData.postcard_image_url,//服务器返回的带参数的小程序码地址
-      src:'https://www.hattonstar.com/storage/title/2019-11-21-19-52-22-5dd67a76ef081.jpg',
+      src: app.globalData.post_url,//服务器返回的带参数的小程序码地址
       success: function (res) {
         let qrCodePath = res.path;
         that.setData({
@@ -171,7 +170,7 @@ Component({
 
     showLoading: function () {
       wx.showLoading({
-        title: '极客加载中...',
+        title: '海报加载中...',
       })
     },
 
@@ -202,10 +201,6 @@ Component({
     drawImage: function () {
       var that = this;
       const ctx = wx.createCanvasContext('myCanvas', this);
-      var bgPath = '../../images/10.jpg';
-      //var bgPath = 'https://www.hattonstar.com/card/10.jpg';
-
-      console.log(bgPath);
       ctx.setFillStyle(WHITE);
       ctx.fillRect(0, 0, windowWidth, windowHeight);
 

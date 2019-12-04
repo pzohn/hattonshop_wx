@@ -1,3 +1,4 @@
+var app = getApp();
 Page({
 
   /**
@@ -77,7 +78,8 @@ Page({
     wx.request({
       url: 'https://www.hattonstar.com/getInfoByName',
       data: {
-        name: name
+        name: name,
+        shop_id: app.globalData.shop_id
       },
       method: 'POST',
       success: function (res) {

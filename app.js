@@ -14,7 +14,8 @@ App({
         wx.request({
           url: 'https://www.hattonstar.com/getWxUser',
           data: {
-            js_code: res.code
+            js_code: res.code,
+            shop_id: that.globalData.shop_id
           },
           method: 'POST',
           success: function (res) {
@@ -73,6 +74,8 @@ App({
     openid:'',
     listdetail:{},
     wx_id:0,
-    share_id:0
+    share_id:0,
+    shop_id:1,
+    post_url:''
   }
 })

@@ -6,6 +6,7 @@ Page({
     maskHidden: true,
     imagePath: '',
     placeholder: 'http://wxapp-union.com',//默认二维码生成文本
+    save_flag:true,
     
     shareThree: {
       avatar: '',
@@ -17,9 +18,7 @@ Page({
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
     var size = this.setCanvasSize();//动态设置画布大小
-    //var initUrl = this.data.placeholder;
     var initUrl = 'https://www.hattonstar.com/d?shareid' + app.globalData.wx_id + '&id=' + options.detail_id;
-    console.log(initUrl);
     this.createQrCode(initUrl, "mycanvas", size.w, size.h);
   },
 
@@ -82,10 +81,9 @@ Page({
       canvasId: 'mycanvas',
       success: function (res) {
         var tempFilePath = res.tempFilePath;
-        console.log(tempFilePath);
         that.setData({
           imagePath: tempFilePath,
-          // canvasHidden:true
+          save_flag:false
         });
         app.globalData.postcard_code_url = tempFilePath;
       },

@@ -31,7 +31,7 @@
 .search{
   display: flex;
   flex-direction: row;
-  width: 95%;
+  width: 98%;
   padding-bottom: 1px;
   position: fixed;
   top: 0rpx;
@@ -221,7 +221,7 @@ color: #222;
 }
 .productimg{
    width:100%;
-   height:100%;
+   height:90%;
 }
 .imgview{
   width:100%;

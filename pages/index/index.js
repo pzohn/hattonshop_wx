@@ -118,6 +118,7 @@ Page({
     wx.request({
       url: 'https://www.hattonstar.com/getIndexset',
       data: {
+        shop_id: app.globalData.shop_id
       },
       method: 'POST',
       success: function (res) {
@@ -171,7 +172,8 @@ Page({
     wx.request({
       url: 'https://www.hattonstar.com/shoppingGetByType',
       data: {
-        type_id: id
+        type_id: id,
+        shop_id: app.globalData.shop_id
       },
       method: 'POST',
       success: function (res) {

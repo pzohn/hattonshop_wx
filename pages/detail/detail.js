@@ -90,6 +90,10 @@ Page({
             video_url: 'https://www.hattonstar.com/storage/' + res.data.data.shopping.video[0]
           });
         }
+        if (res.data.data.shopping.poster != "") {
+          app.globalData.post_url = 'https://www.hattonstar.com/storage/' + res.data.data.shopping.poster[0];
+        }
+        
       },
       fail: function (res) {
         wx.showModal({
