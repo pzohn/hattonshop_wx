@@ -210,6 +210,34 @@ Page({
       });
       app.globalData.authorizeFlag = true;
     }
+    this.initCert();
+  },
+
+  initCert: function () {
+    var that = this;
+    wx.request({
+      url: 'https://www.hattonstar.com/getCertsNum',
+      data: {
+        wx_id: app.globalData.wx_id
+      },
+      method: 'POST',
+      success: function (res) {
+        var num = res.data;
+        if (num) {
+          var numString = num + ""
+          wx.setTabBarBadge({
+            index: 1,
+            text: numString
+          })
+        } else {
+          wx.removeTabBarBadge({
+            index: 1,
+          })
+        }
+      },
+      fail: function (res) {
+      }
+    })
   },
 
   /**
