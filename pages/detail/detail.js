@@ -45,11 +45,19 @@ Page({
   },
 
   onLoad: function (options) {
-    if (options.shareid != undefined){
-      app.globalData.shareid = options.shareid;
-    }
     var id = options.id;
-    this.setData({ 
+    let qrUrl = decodeURIComponent(options.q)
+    if (qrUrl.indexOf("shareid=") != -1 ){
+      var arr = qrUrl.split("&");
+      var strShareId = arr[0];
+      var strId = arr[1];
+      var arrShareId = strShareId.split("=");
+      var arrId = strId.split("=");
+      id = arrId[1];
+      app.globalData.share_id = arrShareId[1];
+    }
+    
+    this.setData({
       detail_id:id
       });
     this.initData(id);
