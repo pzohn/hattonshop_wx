@@ -9,6 +9,8 @@ Page({
     nickName:'未授权',
     avatarUrl:'',
     wx_id:0,
+    royalty:0,
+    integral:0,
     iconArray: [
       {
         "iconUrl": 'https://www.hattonstar.com/gfcamp/info.png',
@@ -20,6 +22,16 @@ Page({
         "iconText": '收货地址',
         "id": 2
       },
+      {
+        "iconUrl": '../../images/jifen.png',
+        "iconText": '我的分润',
+        "id": 3
+      },
+      {
+        "iconUrl": 'https://www.hattonstar.com/gfcamp/card.png',
+        "iconText": '积分商城',
+        "id": 4
+      }
     ],
 
     tradeArray: [
@@ -52,11 +64,7 @@ Page({
   },
 
 /*
-      {
-        "iconUrl": 'https://www.hattonstar.com/gfcamp/card.png',
-        "iconText": '优惠卷',
-        "id": 2
-      },
+
       ,
       {
         "iconUrl": 'https://www.hattonstar.com/gfcamp/suggest.png',
@@ -130,6 +138,18 @@ Page({
       })
     } else if (index == 2){
       that.onAddress();
+    } else if (index == 3) {
+      that.onAddress();
+    } else if (index == 4) {
+      wx.showModal({
+        content: '在路上,敬请期待',
+        showCancel:false,
+        success: function (res) {
+          if (res.confirm) {
+          } else if (res.cancel) {
+          }
+        }
+      })
     } else if (index == 10) {
       this.listNew(0)
     } else if (index == 11) {
@@ -211,6 +231,7 @@ Page({
       app.globalData.authorizeFlag = true;
     }
     this.initCert();
+    this.initMyFen();
   },
 
   initCert: function () {
@@ -234,6 +255,25 @@ Page({
             index: 1,
           })
         }
+      },
+      fail: function (res) {
+      }
+    })
+  },
+
+  initMyFen: function () {
+    var that = this;
+    wx.request({
+      url: 'https://www.hattonstar.com/memberSelect',
+      data: {
+        wx_id: app.globalData.wx_id
+      },
+      method: 'POST',
+      success: function (res) {
+        that.setData({
+          royalty: res.data.royalty,
+          integral: res.data.integral
+        });
       },
       fail: function (res) {
       }

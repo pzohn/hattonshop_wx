@@ -6,8 +6,11 @@
       </view>
       <view class="login">
         <view class="authorize" bindtap="authorize">{{nickName}}</view>
-        <!-- <view class="account" bindtap="login">性别：{{sex}}</view> -->
       </view>
+    </view>
+    <view class="myfen">
+      <view>我的积分：{{integral}}</view>
+      <view style="padding-top:20%">我的分润：{{royalty}}</view>
     </view>
   </view>
   <view class="hr"></view>

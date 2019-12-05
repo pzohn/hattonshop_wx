@@ -9,6 +9,8 @@
   background-image: url('https://www.hattonstar.com/gfcamp/myback.jpg');
   padding-top: 30px;
   padding-bottom: 50px;
+  display: flex;
+  flex-direction: row;
 }
 .head{
   display: flex;
@@ -26,6 +28,12 @@
   margin-top:30px;
 }
 
+.myfen{
+  padding-top:5%;
+  padding-left:40%;
+  color: #070000;
+  font-size: 16px;
+}
 .category {
   padding: 15px 0 10px 0;
   overflow: auto;
