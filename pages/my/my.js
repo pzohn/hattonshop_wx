@@ -28,9 +28,14 @@ Page({
         "id": 3
       },
       {
+        "iconUrl": '../../images/refund.png',
+        "iconText": '我的退款',
+        "id": 4
+      },
+      {
         "iconUrl": 'https://www.hattonstar.com/gfcamp/card.png',
         "iconText": '积分商城',
-        "id": 4
+        "id": 5
       }
     ],
 
@@ -62,16 +67,6 @@ Page({
       }
     ]
   },
-
-/*
-
-      ,
-      {
-        "iconUrl": 'https://www.hattonstar.com/gfcamp/suggest.png',
-        "iconText": '意见反馈',
-        "id": 3
-      }
-*/
   /**
    * 生命周期函数--监听页面加载
    */
@@ -139,8 +134,12 @@ Page({
     } else if (index == 2){
       that.onAddress();
     } else if (index == 3) {
-      that.onAddress();
+      wx.navigateTo({
+        url: '../royalty/royalty'
+      })
     } else if (index == 4) {
+      this.listNew(5)
+    }else if (index == 5) {
       wx.showModal({
         content: '在路上,敬请期待',
         showCancel:false,

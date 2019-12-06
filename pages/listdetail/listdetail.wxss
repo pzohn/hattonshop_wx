@@ -97,6 +97,7 @@ page {
     margin: 0 20rpx;
     padding: 30rpx 0;
     border-bottom: 2rpx solid #f3f3f3;
+    font-size: 32rpx;
 }
 .Total {
     text-align: right;

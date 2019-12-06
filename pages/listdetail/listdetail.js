@@ -14,6 +14,8 @@ Page({
     goods_freight: '', //运费
     goods_price: '', //商品价格
     total_price: '', //合计价格
+    all_total_price: '',//最终价格
+    royalty_price: '',//分润抵扣
     item: {
       iconfontBack: "icon-arrowleft",
       navigationBarTitle: "确认订单",
@@ -77,7 +79,7 @@ Page({
                           wx.showToast({
                             title: '支付成功',
                             icon: 'success',
-                            duration: 3000,
+                            duration: 2000,
                             success: function () {
                               setTimeout(function () {
                                 //要延时执行的代码
@@ -122,7 +124,7 @@ Page({
               wx.showToast({
                 title: '关闭成功',
                 icon: 'success',
-                duration: 3000,
+                duration: 2000,
                 success: function () {
                   setTimeout(function () {
                     //要延时执行的代码
@@ -217,7 +219,9 @@ Page({
     this.setData({
       goods_info: goods_info,
       total_price: total_price,
-      status: app.globalData.listdetail.status
+      status: app.globalData.listdetail.status,
+      royalty_price: app.globalData.listdetail.royalty_charge,
+      all_total_price: app.globalData.listdetail.total_charge
     });
     
   },

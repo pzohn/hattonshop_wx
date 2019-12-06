@@ -1,7 +1,6 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/getuser1/getuser1",
     "pages/sharepage/sharepage",
     "pages/phone/phone",
     "pages/getuser/getuser",
@@ -13,10 +12,11 @@
     "pages/search/search",
     "pages/collect/collect",
     "pages/list/list",
-    "pages/listdetail/listdetail",
     "pages/newaddress/newaddress",
     "pages/editaddress/editaddress",
-    "pages/cart/cart"
+    "pages/cart/cart",
+    "pages/royalty/royalty",
+    "pages/listdetail/listdetail"
   ],
   "window": {
     "backgroundTextStyle": "light",

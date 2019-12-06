@@ -6,21 +6,10 @@ Page({
     show_edit: "block",
     edit_name: "编辑",
     edit_show: "none",
-    // list: [],               // 购物车列表
-    // hasList: false,          // 列表是否有数据
     // 默认展示数据
     hasList: true,
     // 商品列表数据
     list: [
-    //   {
-    //   id: 1,
-    //   title: '园艺大师抗皱精华露',
-    //   image: '../../image/shop_car/list_img.png',
-    //   pro_name: "30ml",
-    //   num: 1,
-    //   price: 180,
-    //   selected: true
-    // }
     ],
     // 金额
     totalPrice: 0, // 总价，初始为0

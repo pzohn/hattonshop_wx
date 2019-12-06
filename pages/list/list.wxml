@@ -22,12 +22,16 @@
         <text>订单编号：{{item.out_trade_no}}</text>
     </view>
     <view class='title'>
-        <text>订单价格：￥{{item.total_charge}}</text>
+        <text>分润抵扣：￥{{item.royalty_charge}}</text>
     </view>
+    <view class='title'style="color:green">
+        <text>实际付款：￥{{item.total_charge}}</text>
+    </view> 
     <view class='dingdan'>
         <text style='color:{{item.color}}'>订单状态：{{item.status}}</text>
         <button class='btn' data-id="{{item.trade_id}}"  bindtap='pay' hidden='{{item.payhide}}'>继续支付</button>
         <button class='btn1' data-id="{{item.trade_id}}"  bindtap='delete' hidden='{{item.deletehide}}'>关闭订单</button>
+        <button class='btn1' data-id="{{item.trade_id}}"  bindtap='deleteRefund' hidden='{{item.refundhide}}'>关闭退款</button>        
     </view>
   </view>
 </view>

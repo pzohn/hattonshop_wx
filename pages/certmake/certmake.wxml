@@ -36,24 +36,24 @@
 
  
 <view class="msg_list">
-    <!-- <view class="msg_item">
+    <view class="msg_item">
         <view>商品原价</view>
-        <view>￥11.8</view>
-    </view> -->
+        <view>￥{{total_price}}</view>
+    </view>
     <view class="msg_item">
         <view>配送费</view>
         <view>包邮</view>
     </view>
-    <!-- <view class="msg_item">
-        <view>商品优惠</view>
-        <view>-￥11.8</view>
-    </view> -->
+    <view class="msg_item">
+        <view>分润抵扣</view>
+        <view>-￥{{royalty_price}}</view>
+    </view>
     <view class="Total">
-       总价 <text class="Total_price">￥{{total_price}}</text>
+      总价 <text class="Total_price">￥{{all_total_price}}</text>
     </view>
 </view>
  
 <view class="order_pay">
-    <view class="pay_money">付款 <text class="Total_price">￥{{total_price}}</text></view>
+    <view class="pay_money">付款 <text class="Total_price">￥{{all_total_price}}</text></view>
     <view class="submit_order" bindtap="bindSubmitOrder">提交订单</view>
 </view>

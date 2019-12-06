@@ -2,7 +2,8 @@ var app = getApp()
 Page({
   data: {
     activity: [],
-    page_id:0
+    page_id:0,
+    itemOnFlag:true
   },
 
   /**
@@ -17,6 +18,7 @@ Page({
   initData: function (id) {
     var page = this;
     var url = '';
+    page.setData({ itemOnFlag: true })
     if (id == 0){
       url = 'https://www.hattonstar.com/getOrderAllForPerson'
     } else if (id == 1){
@@ -27,6 +29,9 @@ Page({
       url = 'https://www.hattonstar.com/getOrderUnreceiveForPerson'
     } else if (id == 4) {
       url = 'https://www.hattonstar.com/getOrderFinishForPerson'
+    } else if (id == 5) {
+      url = 'https://www.hattonstar.com/getOrderRefundForPerson'
+      page.setData({itemOnFlag:false})
     } 
     wx.request({
       url: url,
@@ -65,13 +70,18 @@ Page({
           object.trade_id = res.data.data[index].id;
           object.address = res.data.data[index].address;
           object.total_charge = res.data.data[index].charge;
-          console.log(object.status)
+          object.royalty_charge = res.data.data[index].use_royalty;
           if (object.status == '待付款'){
             object.payhide = false;
             object.deletehide = false;
+            object.refundhide = true;
           }else{
             object.payhide = true;
             object.deletehide = true;
+            object.refundhide = true;
+          }
+          if (object.status == '待处理'){
+            object.refundhide = false;
           }
           object.index = index;
           activity[index] = object;
@@ -96,18 +106,67 @@ Page({
   },
   
   gotoDetail(e){
-    var page = this
-    var index = e.currentTarget.dataset.index;
-    app.globalData.listdetail = this.data.activity[index];
-    wx.redirectTo({
-      url: '../listdetail/listdetail?page_id=' + page.data.page_id
-    });
+    if (this.data.itemOnFlag == true){{
+      var page = this
+      var index = e.currentTarget.dataset.index;
+      app.globalData.listdetail = this.data.activity[index];
+      wx.redirectTo({
+        url: '../listdetail/listdetail?page_id=' + page.data.page_id
+      });
+    }}
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
 
+  },
+
+  deleteRefund:function (e) {
+    var id = e.currentTarget.dataset.id;
+    var page = this
+    wx.showModal({
+      title: '关闭退款',
+      content: '确认关闭退款吗?',
+      success: function (res) {
+        if (res.confirm) {
+          wx.request({
+            url: 'https://www.hattonstar.com/postRefund',
+            data: {
+              id: id,
+              refund_status:0
+            },
+            method: 'POST',
+            success: function (res) {
+              wx.showToast({
+                title: '关闭成功',
+                icon: 'success',
+                duration: 3000,
+                success: function () {
+                  setTimeout(function () {
+                    //要延时执行的代码
+                    wx.redirectTo({
+                      url: '../list/list?type=' + page.data.page_id
+                    })
+                  }, 2000)
+                }
+              });
+            },
+            fail: function (res) {
+              wx.showModal({
+                title: '错误提示',
+                content: '服务器无响应，请联系工作人员!',
+                success: function (res) {
+                  if (res.confirm) {
+                  } else if (res.cancel) {
+                  }
+                }
+              })
+            }
+          })
+        }
+      }
+    })
   },
 
   delete: function (e) {

@@ -13,6 +13,8 @@ Page({
     goods_freight: '', //运费
     goods_price: '', //商品价格
     total_price: '', //合计价格
+    all_total_price:'',//最终价格
+    royalty_price:'',//分润抵扣
     item: {
       iconfontBack: "icon-arrowleft",
       navigationBarTitle: "确认订单",
@@ -85,9 +87,17 @@ Page({
       return
     }
     if (this.data.type == 'trade'){
-      this.dealTrade()
+      if (this.data.all_total_price == 0){
+        this.dealTradeFree();
+      }else{
+        this.dealTrade();
+      }
     } else if (this.data.type == 'cert'){
-      this.dealCert();
+      if (this.data.all_total_price == 0){
+        this.dealCertFree();
+      }else{
+        this.dealCert();
+      }
     }
   },
 
@@ -114,7 +124,9 @@ Page({
               num: page.data.goods_count,
               address_id: page.data.address_id,
               name: wxUserInfo.nickName,
-              share_id: app.globalData.share_id
+              share_id: app.globalData.share_id,
+              use_royalty: page.data.royalty_price,
+              total_fee:page.data.all_total_price
             },
             method: 'POST',
             success: function (res) {
@@ -129,7 +141,14 @@ Page({
                     wx.showToast({
                       title: '支付成功',
                       icon: 'success',
-                      duration: 5000
+                      duration: 2000,
+                      success: function () {
+                        setTimeout(function () {
+                          wx.switchTab({
+                            url: '../my/my'
+                          })
+                        }, 2000) //延迟时间
+                      }
                     });
                   },
                   'fail': function (res) {
@@ -142,6 +161,88 @@ Page({
             }
           })
         }
+      }
+    })
+  },
+
+  dealTradeFree() {
+    var page = this;
+    var wxUserInfo = wx.getStorageSync('wxUserInfo');
+    wx.request({
+      url: 'https://www.hattonstar.com/onPayShoppingFree',
+      data: {
+        detail_id: page.data.detail_id,
+        wx_id: app.globalData.wx_id,
+        num: page.data.goods_count,
+        address_id: page.data.address_id,
+        name: wxUserInfo.nickName,
+        share_id: app.globalData.share_id,
+        use_royalty: page.data.royalty_price
+      },
+      method: 'POST',
+      success: function (res) {
+        wx.showToast({
+          title: '支付成功',
+          icon: 'success',
+          duration: 2000,
+          success: function () {
+            setTimeout(function () {
+              wx.switchTab({
+                url: '../my/my',
+              })
+            }, 2000) //延迟时间
+          }
+        });
+      },
+      fail: function (res) {
+      }
+    })
+  },
+
+  dealCertFree() {
+    this.delCerts(app.globalData.certlist);
+    var wxUserInfo = wx.getStorageSync('wxUserInfo');
+    var certInfo = '';
+    for (var index in app.globalData.certlist) {
+      certInfo += app.globalData.certlist[index].shoppingid + ',' + app.globalData.certlist[index].num;
+      certInfo += '@';
+    }
+    certInfo = certInfo.substr(0, certInfo.length - 1);
+
+    var page = this;
+    var body = '';
+    if (page.data.goods_info.length == 1) {
+      body = page.data.goods_info[0].title;
+    } else if (page.data.goods_info.length > 1) {
+      body = page.data.goods_info[0].title + '...'
+    }
+    wx.request({
+      url: 'https://www.hattonstar.com/onPayrCertFree',
+      data: {
+        certInfo: certInfo,
+        body: body,
+        wx_id: app.globalData.wx_id,
+        address_id: page.data.address_id,
+        name: wxUserInfo.nickName,
+        share_id: app.globalData.share_id,
+        use_royalty: page.data.royalty_price
+      },
+      method: 'POST',
+      success: function (res) {
+        wx.showToast({
+          title: '支付成功',
+          icon: 'success',
+          duration: 2000,
+          success: function () {
+            setTimeout(function () {
+              wx.switchTab({
+                url: '../my/my',
+              })
+            }, 2000) //延迟时间
+          }
+        });
+      },
+      fail: function (res) {
       }
     })
   },
@@ -174,10 +275,11 @@ Page({
               certInfo: certInfo,
               wx_id: app.globalData.wx_id,
               address_id: page.data.address_id,
-              charge: page.data.total_price,
+              charge: page.data.all_total_price,
               body: body,
               name: wxUserInfo.nickName,
-              share_id: app.globalData.share_id
+              share_id: app.globalData.share_id,
+              use_royalty: page.data.royalty_price
             },
             method: 'POST',
             success: function (res) {
@@ -192,7 +294,14 @@ Page({
                     wx.showToast({
                       title: '支付成功',
                       icon: 'success',
-                      duration: 5000
+                      duration: 2000,
+                      success: function () {
+                        setTimeout(function () {
+                          wx.switchTab({
+                            url: '../my/my',
+                          })
+                        }, 2000) //延迟时间
+                      }
                     });
                   },
                   'fail': function (res) {
@@ -221,21 +330,9 @@ Page({
    */
   onLoad: function (options) {
     var type = options.type;
-    if (type == 'trade'){
-      var id = options.id;
-      var num = options.num;
-      this.setData({
-        detail_id: id,
-        goods_count: num,
-        type: type
-      });
-      this.initData(id);
-    }else if (type == 'cert'){
-      this.initCert();
-      this.setData({
-        type: type
-      });
-    }
+    var id = options.id;
+    var num = options.num;
+    this.initMember(id, type, num);
   },
 
   initData: function (id) {
@@ -248,7 +345,6 @@ Page({
       },
       method: 'POST',
       success: function (res) {
-        console.log(res);
         var goods_info = [];
         var object = new Object();
         object.title = res.data.name
@@ -257,9 +353,17 @@ Page({
         object.count = page.data.goods_count;
         goods_info[0] = object;
         var total_price = object.price * page.data.goods_count;
+        var royalty_price = page.data.royalty_price;
+        var all_total_price = page.numberFormat(total_price - royalty_price);
+        if (all_total_price <= 0){
+          royalty_price = total_price;
+          all_total_price = 0;
+        }
         page.setData({
           goods_info: goods_info,
-          total_price: total_price
+          total_price: total_price,
+          royalty_price: royalty_price,
+          all_total_price: all_total_price
         });
         if (res.data.address){
           var address_info = [];
@@ -299,6 +403,47 @@ Page({
     })
   },
 
+  initMember: function (id, type, num) {
+    var page = this;
+    wx.request({
+      url: 'https://www.hattonstar.com/memberSelect',
+      data: {
+        wx_id: app.globalData.wx_id
+      },
+      method: 'POST',
+      success: function (res) {
+        var royalty_price = res.data.royalty;
+        page.setData({
+          royalty_price: royalty_price
+        });
+        if (type == 'trade') {
+          page.setData({
+            detail_id: id,
+            goods_count: num,
+            type: type
+          });
+          page.initData(id);
+        } else if (type == 'cert') {
+          page.initCert();
+          page.setData({
+            type: type
+          });
+        }
+      },
+      fail: function (res) {
+        wx.showModal({
+          title: '错误提示',
+          content: '服务器无响应，请联系工作人员!',
+          success: function (res) {
+            if (res.confirm) {
+            } else if (res.cancel) {
+            }
+          }
+        })
+      }
+    })
+  },
+
   initCert: function () {
     var page = this;
     var goods_info = [];
@@ -312,10 +457,18 @@ Page({
       goods_info[index] = object;
       total_price += object.price * object.count;
     }
+    var royalty_price = page.data.royalty_price;
+    var all_total_price = page.numberFormat(total_price - royalty_price);
+    if (all_total_price <= 0) {
+      royalty_price = total_price;
+      all_total_price = 0;
+    }
     if (app.globalData.certlist.length) {
       page.setData({
         goods_info: goods_info,
-        total_price: total_price
+        total_price: total_price,
+        royalty_price: royalty_price,
+        all_total_price: all_total_price
       });
     }
     wx.request({
@@ -360,6 +513,11 @@ Page({
         })
       }
     })
+  },
+
+  numberFormat: function (value) {
+    var v = parseFloat(value)//强转Int，毕竟有可能返回是String类型的数字
+    return v.toFixed(2)
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
