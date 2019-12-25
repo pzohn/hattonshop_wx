@@ -35,11 +35,12 @@
 
 .btn{
   right: 10rpx;
-  width: 70px;
-  background-color:#FF5722;
+  width: 24%;
+  background:url('https://www.gfcamps.cn/sun/goumai.png') no-repeat center center;
+  background-size: cover;
   height: 28px;
   border-radius: 25rpx;
   font-size: 14px;
   text-align: center;
-  color: white;
+  color: rgba(255,255,255,0);
 }

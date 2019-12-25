@@ -7,6 +7,7 @@ Page({
     imagePath: '',
     placeholder: 'http://wxapp-union.com',//默认二维码生成文本
     save_flag:true,
+    id:0,
     
     shareThree: {
       avatar: '',
@@ -18,6 +19,7 @@ Page({
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
     var size = this.setCanvasSize();//动态设置画布大小
+    this.setData({ id: options.id});
     var initUrl = 'https://www.hattonstar.com/d?shareid=' + app.globalData.wx_id + '&id=' + options.id;
     this.createQrCode(initUrl, "mycanvas", size.w, size.h);
   },
@@ -103,12 +105,10 @@ Page({
   },
 
   onShareAppMessage: function () {
-    var app = getApp();
-    var id = app.globalData.shop_id;
     return {
-      title: '小鹿哈顿的声音邮局',
-      path: '/pages/login/login?shareid=' + id,
-      imageUrl: 'https://www.hattonstar.com/page/1.jpg',
+      title: '哈顿星球_欢乐购',
+      path: '/pages/detail/detail?shareid=' + app.globalData.wx_id + '&id=' + this.data.id,
+      imageUrl: app.globalData.post_url,
       success: function (res) {
         // 转发成功
       },

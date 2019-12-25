@@ -162,7 +162,7 @@ Page({
     wx.request({
       url: 'https://www.hattonstar.com/iscollect',
       data: {
-        phone: app.globalData.phone,
+        wx_id: app.globalData.wx_id,
         detail_id: page.data.detail_id
       },
       method: 'POST',
@@ -252,7 +252,7 @@ Page({
 
   home() {
     wx.switchTab({
-      url: '../index/index',
+      url: app.globalData.index_style,
     })
   },
 

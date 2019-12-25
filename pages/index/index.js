@@ -56,6 +56,19 @@ Page({
 
   onShow: function () {
     this.initCert();
+
+    var page = this;
+    page.initData(1);
+    page.initData(2);
+    page.initData(3);
+    page.initData(4);
+    page.initData(5);
+    page.initData(6);
+    page.setData({
+      flag_1: false
+    });
+
+    page.initData1();
   },
 
   //事件处理函数
@@ -94,27 +107,18 @@ Page({
       },
     })
 
-    var loginCode = wx.getStorageSync('phone');
-    var loginId = wx.getStorageSync('login_id');
-    if (loginCode == "" || loginId == "") {
-      app.globalData.loginFlag = false;
-    } else {
-      app.globalData.loginFlag = true;
-      app.globalData.phone = loginCode;
-      app.globalData.login_id = loginId;
-    }
-    var page = this;
-    page.initData(1);
-    page.initData(2);
-    page.initData(3);
-    page.initData(4);
-    page.initData(5);
-    page.initData(6);
-    page.setData({
-      flag_1: false
-    });
+    // var page = this;
+    // page.initData(1);
+    // page.initData(2);
+    // page.initData(3);
+    // page.initData(4);
+    // page.initData(5);
+    // page.initData(6);
+    // page.setData({
+    //   flag_1: false
+    // });
 
-    this.initData1();
+    // this.initData1();
   },
 
   initData1: function () {
@@ -325,6 +329,21 @@ Page({
     })
   },
 
+  onPullDownRefresh: function () {
+    var page = this;
+    page.initData(1);
+    page.initData(2);
+    page.initData(3);
+    page.initData(4);
+    page.initData(5);
+    page.initData(6);
+    page.setData({
+      flag_1: false
+    });
+
+    page.initData1();
+  },
+
   switchTab(event) {
     var cur = event.detail.current;
     var singleNavWidth = this.data.windowWidth / 5;
@@ -337,27 +356,37 @@ Page({
     var id = cur + 1;
     if (id == 1) {
       page.setData({
-        flag_1: false, flag_2: true, flag_3: true, flag_4: true, flag_5: true, currentTab: id - 1
+        flag_1: false, flag_2: true, flag_3: true, flag_4: true, flag_5: true, flag_6: true, flag_7: true, currentTab: id - 1
       });
     }
     else if (id == 2) {
       page.setData({
-        flag_1: true, flag_2: false, flag_3: true, flag_4: true, flag_5: true, currentTab: id - 1
+        flag_1: true, flag_2: false, flag_3: true, flag_4: true, flag_5: true, flag_6: true, flag_7: true, currentTab: id - 1
       });
     }
     else if (id == 3) {
       page.setData({
-        flag_1: true, flag_2: true, flag_3: false, flag_4: true, flag_5: true, currentTab: id - 1
+        flag_1: true, flag_2: true, flag_3: false, flag_4: true, flag_5: true, flag_6: true, flag_7: true, currentTab: id - 1
       });
     }
     else if (id == 4) {
       page.setData({
-        flag_1: true, flag_2: true, flag_3: true, flag_4: false, flag_5: true, currentTab: id - 1
+        flag_1: true, flag_2: true, flag_3: true, flag_4: false, flag_5: true, flag_6: true, flag_7: true, currentTab: id - 1
       });
     }
     else if (id == 5) {
       page.setData({
-        flag_1: true, flag_2: true, flag_3: true, flag_4: true, flag_5: false, currentTab: id - 1
+        flag_1: true, flag_2: true, flag_3: true, flag_4: true, flag_5: false, flag_6: true, flag_7: true, currentTab: id - 1
+      });
+    }
+    else if (id == 6) {
+      page.setData({
+        flag_1: true, flag_2: true, flag_3: true, flag_4: true, flag_5: true, flag_6: false, flag_7: true, currentTab: id - 1
+      });
+    }
+    else if (id == 7) {
+      page.setData({
+        flag_1: true, flag_2: true, flag_3: true, flag_4: true, flag_5: true, flag_6: true, flag_7: false, currentTab: id - 1
       });
     }
   }

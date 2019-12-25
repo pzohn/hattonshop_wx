@@ -24,7 +24,7 @@ Page({
       },
       {
         "iconUrl": '../../images/jifen.png',
-        "iconText": '我的分润',
+        "iconText": '我的代金卷',
         "id": 3
       },
       {
@@ -78,6 +78,12 @@ Page({
   },
 
   collect () {
+    var wxUserInfo = wx.getStorageSync('wxUserInfo');
+    if (wxUserInfo.nickName == undefined) {
+      app.globalData.authorizeFlag = false;
+      this.authorize();
+      return;
+    }
     wx.request({
       url: 'https://www.hattonstar.com/getCollect',
       data: {
@@ -125,6 +131,12 @@ Page({
   },
 
   onItemClick: function (e) {
+    var wxUserInfo = wx.getStorageSync('wxUserInfo');
+    if (wxUserInfo.nickName == undefined) {
+      app.globalData.authorizeFlag = false;
+      this.authorize();
+      return;
+    }
     var index = e.currentTarget.id;
     var that = this;
     if (index == 1){

@@ -22,7 +22,7 @@
         <text>订单编号：{{item.out_trade_no}}</text>
     </view>
     <view class='title'>
-        <text>分润抵扣：￥{{item.royalty_charge}}</text>
+        <text>代金卷抵扣：￥{{item.royalty_charge}}</text>
     </view>
     <view class='title'style="color:green">
         <text>实际付款：￥{{item.total_charge}}</text>

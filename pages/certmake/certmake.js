@@ -25,18 +25,24 @@ Page({
     hasAddr: false, //选项
     order_message: '', //订单留言
     cart_ids: [], // 购物车商品id
-    type:''
+    type:'',
+    fixed_address_flag:false,
+    fixed_address:[]
   },
   //选择地址
   bindaddress: function () {
-    if (this.data.hasAddr == 1) {
-      wx.redirectTo({
-        url: '../editaddress/editaddress?id=' + this.data.address_id + '&detail_id=' + this.data.detail_id + '&type=' + this.data.type + '&count=' + this.data.goods_count
-      })
+    if (this.data.fixed_address_flag == false){
+      if (this.data.hasAddr == 1) {
+        wx.redirectTo({
+          url: '../editaddress/editaddress?id=' + this.data.address_id + '&detail_id=' + this.data.detail_id + '&type=' + this.data.type + '&count=' + this.data.goods_count
+        })
+      } else {
+        wx.redirectTo({
+          url: '../newaddress/newaddress?detail_id=' + this.data.detail_id + '&type=' + this.data.type + '&count=' + this.data.goods_count
+        })
+      }
     } else {
-      wx.redirectTo({
-        url: '../newaddress/newaddress?detail_id=' + this.data.detail_id + '&type=' + this.data.type + '&count=' + this.data.goods_count
-      })
+      
     }
 
 
@@ -108,7 +114,18 @@ Page({
     }
   },
 
+  authorize: function () {
+    wx.navigateTo({
+      url: '../getuser/getuser'
+    });
+  },
   dealTrade() {
+    var wxUserInfo = wx.getStorageSync('wxUserInfo');
+    if (wxUserInfo.nickName == undefined) {
+      app.globalData.authorizeFlag = false;
+      this.authorize();
+      return;
+    }
     var page = this;
     var wxUserInfo = wx.getStorageSync('wxUserInfo');
     wx.login({
@@ -126,7 +143,8 @@ Page({
               name: wxUserInfo.nickName,
               share_id: app.globalData.share_id,
               use_royalty: page.data.royalty_price,
-              total_fee:page.data.all_total_price
+              total_fee:page.data.all_total_price,
+              shop_id: app.globalData.shop_id
             },
             method: 'POST',
             success: function (res) {
@@ -166,6 +184,12 @@ Page({
   },
 
   dealTradeFree() {
+    var wxUserInfo = wx.getStorageSync('wxUserInfo');
+    if (wxUserInfo.nickName == undefined) {
+      app.globalData.authorizeFlag = false;
+      this.authorize();
+      return;
+    }
     var page = this;
     var wxUserInfo = wx.getStorageSync('wxUserInfo');
     wx.request({
@@ -200,6 +224,12 @@ Page({
   },
 
   dealCertFree() {
+    var wxUserInfo = wx.getStorageSync('wxUserInfo');
+    if (wxUserInfo.nickName == undefined) {
+      app.globalData.authorizeFlag = false;
+      this.authorize();
+      return;
+    }
     this.delCerts(app.globalData.certlist);
     var wxUserInfo = wx.getStorageSync('wxUserInfo');
     var certInfo = '';
@@ -248,6 +278,12 @@ Page({
   },
 
   dealCert() {
+    var wxUserInfo = wx.getStorageSync('wxUserInfo');
+    if (wxUserInfo.nickName == undefined) {
+      app.globalData.authorizeFlag = false;
+      this.authorize();
+      return;
+    }
     this.delCerts(app.globalData.certlist);
     var wxUserInfo = wx.getStorageSync('wxUserInfo');
     var certInfo = '';
@@ -279,7 +315,8 @@ Page({
               body: body,
               name: wxUserInfo.nickName,
               share_id: app.globalData.share_id,
-              use_royalty: page.data.royalty_price
+              use_royalty: page.data.royalty_price,
+              shop_id: app.globalData.shop_id
             },
             method: 'POST',
             success: function (res) {
@@ -530,7 +567,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function (options) {
-
+    this.setData({fixed_address_flag:app.globalData.fixed_address_flag})
   },
 
   /**

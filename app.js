@@ -104,6 +104,9 @@ App({
     wx_id:0,
     share_id:0,
     shop_id:1,
-    post_url:''
+    post_url:'',
+    index_style:'../index/index',
+    fixed_address_flag:true,
+    leasing_id: 0
   }
 })

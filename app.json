@@ -1,6 +1,5 @@
 {
   "pages": [
-    "pages/sharebuy/sharebuy",
     "pages/index/index",
     "pages/sharepage/sharepage",
     "pages/phone/phone",

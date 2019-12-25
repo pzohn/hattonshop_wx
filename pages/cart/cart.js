@@ -42,8 +42,13 @@ Page({
           object.selected = true;
           list[i] = object;
         }
+        var hasList = true;
+        if (list.length == 0) {
+          hasList = false;
+        }
         page.setData({
-          list: list
+          list: list,
+          hasList: hasList
         });
 
         // 价格方法
@@ -144,15 +149,14 @@ Page({
             list: list
           });
           // 如果数据为空
-          if (!list.length) {
+
+          that.count_price();
+          that.deleteCert(id);
+          if (list.length == 0) {
             that.setData({
               hasList: false
             });
-          } else {
-            // 调用金额渲染数据
-            that.count_price();
-            that.deleteCert(id);
-          }
+          } 
         } else {
           console.log(res);
         }
