@@ -21,7 +21,7 @@
 .canvas-box{position: fixed;top:999999rpx;left: 0}
 
 .btn{
-    width: 50%;
+    width: 33%;
     color: #999999;
 }
 

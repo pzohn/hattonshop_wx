@@ -80,31 +80,7 @@ Page({
   },
   //  提交订单
   bindSubmitOrder: function (e) {
-    if (this.data.hasAddr == 0) {
-      wx.showModal({
-        title: '错误提示',
-        content: '没有选择地址，请完善!',
-        success: function (res) {
-          if (res.confirm) {
-          } else if (res.cancel) {
-          }
-        }
-      })
-      return
-    }
-    if (this.data.type == 'trade'){
-      if (this.data.all_total_price == 0){
-        this.dealTradeFree();
-      }else{
-        this.dealTrade();
-      }
-    } else if (this.data.type == 'cert'){
-      if (this.data.all_total_price == 0){
-        this.dealCertFree();
-      }else{
-        this.dealCert();
-      }
-    }
+    this.doDeal();
   },
 
   delCerts(list) {
@@ -603,5 +579,33 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  doDeal:function() {
+    if (this.data.hasAddr == 0) {
+      wx.showModal({
+        title: '错误提示',
+        content: '没有选择地址，请完善!',
+        success: function (res) {
+          if (res.confirm) {
+          } else if (res.cancel) {
+          }
+        }
+      })
+      return
+    }
+    if (this.data.type == 'trade') {
+      if (this.data.all_total_price == 0) {
+        this.dealTradeFree();
+      } else {
+        this.dealTrade();
+      }
+    } else if (this.data.type == 'cert') {
+      if (this.data.all_total_price == 0) {
+        this.dealCertFree();
+      } else {
+        this.dealCert();
+      }
+    }
   }
 })

@@ -45,23 +45,50 @@
 
 .btn{
   right: 10rpx;
-  width: 100px;
-  background-color:#FF5722;
+  width: 24%;
+  background:url('https://www.gfcamps.cn/sun/jxzf.png') no-repeat center center;
+  background-size: cover;
   height: 28px;
   border-radius: 25rpx;
   font-size: 14px;
   text-align: center;
-  color: white;
+  color: rgba(255,255,255,0);
 }
+
 .btn1{
   right: 10rpx;
-  width: 100px;
-  background-color:rgb(34, 49, 255);
+  width: 24%;
+  background:url('https://www.gfcamps.cn/sun/gbdd.png') no-repeat center center;
+  background-size: cover;
   height: 28px;
   border-radius: 25rpx;
   font-size: 14px;
   text-align: center;
-  color: white;
+  color: rgba(255,255,255,0);
+}
+
+.btn2{
+  right: 10rpx;
+  width: 24%;
+  background:url('https://www.gfcamps.cn/sun/gbtk.png') no-repeat center center;
+  background-size: cover;
+  height: 28px;
+  border-radius: 25rpx;
+  font-size: 14px;
+  text-align: center;
+  color: rgba(255,255,255,0);
+}
+
+.btn3{
+  right: 10rpx;
+  width: 24%;
+  background:url('https://www.gfcamps.cn/sun/tjtk.png') no-repeat center center;
+  background-size: cover;
+  height: 28px;
+  border-radius: 25rpx;
+  font-size: 14px;
+  text-align: center;
+  color: rgba(255,255,255,0);
 }
 
 .listimg{

@@ -2,7 +2,7 @@
 <!--pages/shoporder/shoporder.wxml-->
 <view class= "header">
   <view class="header_content">
-    <text class="header_title">我的代金卷</text>
+    <text class="header_title">我的代金券</text>
     <text class="header_item">{{myroyalty}}</text>
   </view>
 </view>
@@ -18,7 +18,7 @@
       <view class="orderShopList" data-item-index="{{index}}">
         <view class="first-line">
           <text>{{item.BillDate}}</text>
-          <text class="text-money">代金卷：¥ {{item.royalty}}</text>
+          <text class="text-money">代金券：¥ {{item.royalty}}</text>
         </view>
         <view>
           <text class="text-left">商品名称</text>

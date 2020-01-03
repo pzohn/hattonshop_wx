@@ -50,7 +50,7 @@
         <view>包邮</view>
     </view>
     <view class="msg_item">
-        <view>代金卷抵扣</view>
+        <view>代金券抵扣</view>
         <view>-￥{{royalty_price}}</view>
     </view>
     <view class="Total">

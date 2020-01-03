@@ -10,7 +10,7 @@
     </view>
     <view class="myfen">
       <view>我的积分：{{integral}}</view>
-      <view style="padding-top:20%">我的代金卷：{{royalty}}</view>
+      <view style="padding-top:20%">我的代金券：{{royalty}}</view>
     </view>
   </view>
   <view class="hr"></view>

@@ -24,7 +24,7 @@ Page({
       },
       {
         "iconUrl": '../../images/jifen.png',
-        "iconText": '我的代金卷',
+        "iconText": '我的代金券',
         "id": 3
       },
       {

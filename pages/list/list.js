@@ -75,11 +75,18 @@ Page({
             object.payhide = false;
             object.deletehide = false;
             object.refundhide = true;
-          }else{
+            object.refund = true;
+          } else if (object.status == '待收货') {
+            object.refund = false;
             object.payhide = true;
             object.deletehide = true;
             object.refundhide = true;
-          }
+          }else {
+            object.refund = true;
+            object.payhide = true;
+            object.deletehide = true;
+            object.refundhide = true;
+          } 
           if (object.status == '待处理'){
             object.refundhide = false;
           }
@@ -215,6 +222,53 @@ Page({
     })
   },
 
+  refund: function (e) {
+    var id = e.currentTarget.dataset.id;
+    var page = this
+    wx.showModal({
+      title: '提交退款',
+      content: '确定提交退款吗?',
+      success: function (res) {
+        if (res.confirm) {
+          wx.request({
+            url: 'https://www.hattonstar.com/postRefund',
+            data: {
+              id: id,
+              refund_status: 1
+            },
+            method: 'POST',
+            success: function (res) {
+              wx.showToast({
+                title: '提交退款成功',
+                icon: 'success',
+                duration: 3000,
+                success: function () {
+                  setTimeout(function () {
+                    //要延时执行的代码
+                    wx.redirectTo({
+                      url: '../list/list?type=' + page.data.page_id
+                    })
+                  }, 2000)
+                }
+              });
+            },
+            fail: function (res) {
+              wx.showModal({
+                title: '错误提示',
+                content: '服务器无响应，请联系工作人员!',
+                success: function (res) {
+                  if (res.confirm) {
+                  } else if (res.cancel) {
+                  }
+                }
+              })
+            }
+          })
+        }
+      }
+    })
+  },
+
   pay: function (e) {
     var id = e.currentTarget.dataset.id;
     var page = this
@@ -231,7 +285,8 @@ Page({
                   url: 'https://www.hattonstar.com/onRePay',
                   data: {
                     js_code: code,
-                    trade_id: id
+                    trade_id: id,
+                    shop_id: app.globalData.shop_id
                   },
                   method: 'POST',
                   success: function (res) {

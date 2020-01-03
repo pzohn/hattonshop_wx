@@ -41,7 +41,9 @@ Page({
     // guigeList: [{ guige: '100', price: '150' }, { guige: '200', price: '150' }, { guige: '300', price: '150' }],
     guigeList: [{ guige: '默认规格', price: '0' }],
     num: 1,//初始数量
-    buy_flag:false
+    buy_flag:false,
+    name: '',
+    phone: ''
   },
 
   onLoad: function (options) {
@@ -55,6 +57,10 @@ Page({
       var arrId = strId.split("=");
       id = arrId[1];
       app.globalData.share_id = arrShareId[1];
+    }
+    var share_id = options.shareid;
+    if (share_id != undefined){
+      app.globalData.share_id = share_id;
     }
     
     this.setData({
@@ -188,17 +194,67 @@ Page({
 
   // 立即购买
   immeBuy() {
-    this.setData({ 
-      showModalStatus:true,
-      buy_flag:true
+    var that = this;
+    wx.request({
+      url: 'https://www.hattonstar.com/getBaseInfo',
+      data: {
+        wx_id: app.globalData.wx_id
+      },
+      method: 'POST',
+      success: function (res) {
+        if (res.data == 0) {
+          that.setData({
+            showModalStatus: true,
+            buy_flag: true
+          })
+        } else {
+          that.showDialogBtn();
+        }
+      },
+      fail: function (res) {
+        wx.showModal({
+          title: '错误提示',
+          content: '服务器无响应，请联系工作人员!',
+          success: function (res) {
+            if (res.confirm) {
+            } else if (res.cancel) {
+            }
+          }
+        })
+      }
     })
   },
 
   // 加入购物车
   immeCert() {
-    this.setData({ 
-      showModalStatus: true,
-      buy_flag: false
+    var that = this;
+    wx.request({
+      url: 'https://www.hattonstar.com/getBaseInfo',
+      data: {
+        wx_id: app.globalData.wx_id
+      },
+      method: 'POST',
+      success: function (res) {
+        if (res.data == 0) {
+          that.setData({
+            showModalStatus: true,
+            buy_flag: false
+          })
+        } else {
+          that.showDialogBtn();
+        }
+      },
+      fail: function (res) {
+        wx.showModal({
+          title: '错误提示',
+          content: '服务器无响应，请联系工作人员!',
+          success: function (res) {
+            if (res.confirm) {
+            } else if (res.cancel) {
+            }
+          }
+        })
+      }
     })
   },
 
@@ -310,6 +366,14 @@ Page({
       num: num,
       minusStatus: minusStatus
     });
+  }, 
+
+  authorize: function () {
+    if (app.globalData.authorizeFlag == false) {
+      wx.navigateTo({
+        url: '../getuser/getuser'
+      });
+    }
   },
 
   //显示对话框
@@ -353,5 +417,67 @@ Page({
         showModalStatus: false
       })
     }.bind(this), 200)
+  },
+
+  inputChangeName: function (e) {
+    this.setData({ name: e.detail.value })
+  },
+
+  inputChangePhone: function (e) {
+    this.setData({ phone: e.detail.value })
+  },
+
+  showDialogBtn: function () {
+    this.setData({
+      showModal: true
+    })
+  },
+
+  preventTouchMove: function () {
+
+  },
+
+  hideModal: function () {
+    var that = this;
+    wx.request({
+      url: 'https://www.hattonstar.com/BaseInfoUpdate',
+      data: {
+        wx_id: app.globalData.wx_id,
+        name: that.data.name,
+        phone: that.data.phone
+      },
+      method: 'POST',
+      success: function (res) {
+        wx.showToast({
+          title: '提交成功',
+          icon: 'success',
+          duration: 2000
+        })
+        that.setData({
+          showModal: false
+        });
+      },
+      fail: function (res) {
+        wx.showModal({
+          title: '错误提示',
+          content: '服务器无响应，请联系工作人员!',
+          success: function (res) {
+            if (res.confirm) {
+            } else if (res.cancel) {
+            }
+          }
+        })
+      }
+    })
+  },
+
+  onCancel: function () {
+    this.setData({
+      showModal: false
+    });
+  },
+
+  onConfirm: function () {
+    this.hideModal();
   },
 })
