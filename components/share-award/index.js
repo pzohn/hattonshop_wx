@@ -87,7 +87,7 @@ Component({
     detailStr: {
       invite: '学海无涯苦作舟',
       nickInvite: '蹦萨卡拉卡',
-      bpbMini: '哈顿星球_欢乐购',
+      bpbMini: '星球云仓_欢乐购',
       clickToMini: '(识别二维码分享)',
       awardContent: '我在北方的寒夜里四季如春'
     },

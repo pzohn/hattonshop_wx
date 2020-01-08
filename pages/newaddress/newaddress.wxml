@@ -28,12 +28,12 @@
 		<input placeholder="如街道，门牌号" bindinput="accountInput" id = "3"></input>
 	</view>
 </view>
-<view class="user_input flexRowBetween">
+<!-- <view class="user_input flexRowBetween">
 	<view class="input_note address_set">设为默认地址</view>
 	<view class="body-view">
 		<switch bindchange="switch2Change"/>
 	</view>
-</view>
+</view> -->
 <view class="submit_info" bindtap="backAddress">
 	保存
 </view>

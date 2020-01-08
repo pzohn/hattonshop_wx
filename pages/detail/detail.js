@@ -437,7 +437,7 @@ Page({
 
   },
 
-  hideModal: function () {
+  hideModalEx: function () {
     var that = this;
     wx.request({
       url: 'https://www.hattonstar.com/BaseInfoUpdate',
@@ -478,6 +478,6 @@ Page({
   },
 
   onConfirm: function () {
-    this.hideModal();
+    this.hideModalEx();
   },
 })

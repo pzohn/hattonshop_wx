@@ -20,6 +20,7 @@ App({
           method: 'POST',
           success: function (res) {
             that.globalData.wx_id = res.data.id;
+            console.log(that.globalData.wx_id)
             if (res.data.nikename != ""){
               var wxUserInfo = new Object();
               wxUserInfo.nickName = res.data.nikename;
@@ -106,7 +107,7 @@ App({
     shop_id:1,
     post_url:'',
     index_style:'../index/index',
-    fixed_address_flag:true,
+    fixed_address_flag:false,
     leasing_id: 0
   }
 })

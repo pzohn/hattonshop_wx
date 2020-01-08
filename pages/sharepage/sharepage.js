@@ -106,7 +106,7 @@ Page({
 
   onShareAppMessage: function () {
     return {
-      title: '哈顿星球_欢乐购',
+      title: '星球云仓_欢乐购',
       path: '/pages/detail/detail?shareid=' + app.globalData.wx_id + '&id=' + this.data.id,
       imageUrl: app.globalData.post_url,
       success: function (res) {

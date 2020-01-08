@@ -32,11 +32,11 @@ Page({
         "iconText": '我的退款',
         "id": 4
       },
-      {
-        "iconUrl": 'https://www.hattonstar.com/gfcamp/card.png',
-        "iconText": '积分商城',
-        "id": 5
-      }
+      // {
+      //   "iconUrl": 'https://www.hattonstar.com/gfcamp/card.png',
+      //   "iconText": '积分商城',
+      //   "id": 5
+      // }
     ],
 
     tradeArray: [

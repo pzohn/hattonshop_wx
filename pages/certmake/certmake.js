@@ -31,6 +31,9 @@ Page({
   },
   //选择地址
   bindaddress: function () {
+    console.log(111)
+    console.log(this.data.fixed_address_flag)
+    console.log(this.data.hasAddr)
     if (this.data.fixed_address_flag == false){
       if (this.data.hasAddr == 1) {
         wx.redirectTo({
