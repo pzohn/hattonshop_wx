@@ -20,7 +20,7 @@ Page({
     // 页面初始化 options为页面跳转所带来的参数
     var size = this.setCanvasSize();//动态设置画布大小
     this.setData({ id: options.id});
-    var initUrl = 'https://www.hattonstar.com/d?shareid=' + app.globalData.wx_id + '&id=' + options.id;
+    var initUrl = 'https://www.hattonstar.com/f?shareid=' + app.globalData.wx_id + '&id=' + options.id;
     this.createQrCode(initUrl, "mycanvas", size.w, size.h);
   },
 

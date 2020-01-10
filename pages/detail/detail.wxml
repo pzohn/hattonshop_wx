@@ -129,7 +129,7 @@
 <view class="modal-title">请填写基本信息</view>
 <view class="modal-content">
 <view class="modal-input">
-<input placeholder-class="input-holder" type="number" maxlength="4" bindinput="inputChangeName" class="input" placeholder="姓名"></input>
+<input placeholder-class="input-holder" maxlength="4" bindinput="inputChangeName" class="input" placeholder="姓名"></input>
 </view>
 <view class="modal-input">
 <input placeholder-class="input-holder" type="number" maxlength="11" bindinput="inputChangePhone" class="input" placeholder="电话"></input>
