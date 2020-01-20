@@ -17,19 +17,24 @@
     display: flex;
     flex-direction: row;
 }
-.item text{
+.item_text_ex{
     height: 40px;
     line-height: 40px;
-    margin-left: 10px;
+    margin-left: 5%;
+    width: 20%;
+}
+
+.item_text{
+    height: 40px;
+    line-height: 40px;
+    margin-left: 5%;
+    width: 35%;
 }
 
 .item input{
     height: 40px;
     line-height: 40px;
-    margin-left: 10px;
 }
-
-
 .btn{
     width: 90%;
     color: #999999;

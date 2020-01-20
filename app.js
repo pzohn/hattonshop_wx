@@ -20,7 +20,6 @@ App({
           method: 'POST',
           success: function (res) {
             that.globalData.wx_id = res.data.id;
-            console.log(that.globalData.wx_id)
             if (res.data.nikename != ""){
               var wxUserInfo = new Object();
               wxUserInfo.nickName = res.data.nikename;

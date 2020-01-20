@@ -92,6 +92,7 @@
    <view class='commImg'><image src='{{gg_image}}' mode="aspectFill"></image></view>
    <view class='column'>
       <text class="sku-price">￥{{price}}</text>
+      <text class="sku-stock">剩余库存 {{stock}}</text>
       <text class="sku-title"><block wx:if="{{gg_txt==''}}">请选择规格</block><block wx:else>已选择 {{gg_txt}}</block></text>
    </view>
    <text class="line"></text>

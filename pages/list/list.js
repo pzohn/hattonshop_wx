@@ -271,6 +271,45 @@ Page({
 
   pay: function (e) {
     var id = e.currentTarget.dataset.id;
+    var page = this;
+    wx.request({
+      url: 'https://www.hattonstar.com/repayStock',
+      data: {
+        trade_id: id
+      },
+      method: 'POST',
+      success: function (res) {
+        if (res.data.result) {
+          var str = res.data.str + '库存不足，请关闭订单重新选择!'
+          wx.showModal({
+            title: '库存不足',
+            content: str,
+            showCancel: false,
+            success: function (res) {
+              if (res.confirm) {
+              }
+            }
+          })
+          return
+        } else {
+          page.doPay(id)
+        }
+      },
+      fail: function (res) {
+        wx.showModal({
+          title: '错误提示',
+          content: '服务器无响应，请联系工作人员!',
+          success: function (res) {
+            if (res.confirm) {
+            } else if (res.cancel) {
+            }
+          }
+        })
+      }
+    })
+  },
+
+  doPay(id){
     var page = this
     wx.showModal({
       title: '支付订单',

@@ -31,9 +31,6 @@ Page({
   },
   //选择地址
   bindaddress: function () {
-    console.log(111)
-    console.log(this.data.fixed_address_flag)
-    console.log(this.data.hasAddr)
     if (this.data.fixed_address_flag == false){
       if (this.data.hasAddr == 1) {
         wx.redirectTo({
@@ -106,7 +103,6 @@ Page({
       return;
     }
     var page = this;
-    var wxUserInfo = wx.getStorageSync('wxUserInfo');
     wx.login({
       success: res => {
         var code = res.code;
@@ -202,7 +198,7 @@ Page({
     })
   },
 
-  dealCertFree() {
+  dealCertFree(certInfo) {
     var wxUserInfo = wx.getStorageSync('wxUserInfo');
     if (wxUserInfo.nickName == undefined) {
       app.globalData.authorizeFlag = false;
@@ -210,14 +206,6 @@ Page({
       return;
     }
     this.delCerts(app.globalData.certlist);
-    var wxUserInfo = wx.getStorageSync('wxUserInfo');
-    var certInfo = '';
-    for (var index in app.globalData.certlist) {
-      certInfo += app.globalData.certlist[index].shoppingid + ',' + app.globalData.certlist[index].num;
-      certInfo += '@';
-    }
-    certInfo = certInfo.substr(0, certInfo.length - 1);
-
     var page = this;
     var body = '';
     if (page.data.goods_info.length == 1) {
@@ -256,22 +244,14 @@ Page({
     })
   },
 
-  dealCert() {
+  dealCert(certInfo) {
     var wxUserInfo = wx.getStorageSync('wxUserInfo');
     if (wxUserInfo.nickName == undefined) {
       app.globalData.authorizeFlag = false;
       this.authorize();
       return;
     }
-    this.delCerts(app.globalData.certlist);
-    var wxUserInfo = wx.getStorageSync('wxUserInfo');
-    var certInfo = '';
-    for (var index in app.globalData.certlist) {
-      certInfo += app.globalData.certlist[index].shoppingid + ',' + app.globalData.certlist[index].num;
-      certInfo += '@';
-    }
-    certInfo = certInfo.substr(0, certInfo.length - 1);
-
+   this.delCerts(app.globalData.certlist);
     var page = this;
     var body = '';
     if (page.data.goods_info.length == 1){
@@ -377,9 +357,9 @@ Page({
         }
         page.setData({
           goods_info: goods_info,
-          total_price: total_price,
-          royalty_price: royalty_price,
-          all_total_price: all_total_price
+          total_price: page.numberFormat(total_price),
+          royalty_price: page.numberFormat(royalty_price),
+          all_total_price: page.numberFormat(all_total_price)
         });
         if (res.data.address){
           var address_info = [];
@@ -598,17 +578,100 @@ Page({
       return
     }
     if (this.data.type == 'trade') {
-      if (this.data.all_total_price == 0) {
-        this.dealTradeFree();
-      } else {
-        this.dealTrade();
-      }
+      this.doTrade()
     } else if (this.data.type == 'cert') {
-      if (this.data.all_total_price == 0) {
-        this.dealCertFree();
-      } else {
-        this.dealCert();
-      }
+      this.doCert();
     }
+  },
+
+  doTrade: function () {
+    var page = this;
+    wx.request({
+      url: 'https://www.hattonstar.com/shoppingGetById',
+      data: {
+        id: page.data.detail_id
+      },
+      method: 'POST',
+      success: function (res) {
+        if (res.data.data.shopping.stock <= 0){
+          wx.showModal({
+            title: '库存不足',
+            content: '库存不足，请修改数量或选择其他商品!',
+            showCancel: false,
+            success: function (res) {
+              if (res.confirm) {
+              }
+            }
+          })
+          return
+        }else{
+          if (page.data.all_total_price == 0) {
+            page.dealTradeFree();
+          } else {
+            page.dealTrade();
+          }
+        }
+      },
+      fail: function (res) {
+        wx.showModal({
+          title: '错误提示',
+          content: '服务器无响应，请联系工作人员!',
+          success: function (res) {
+            if (res.confirm) {
+            } else if (res.cancel) {
+            }
+          }
+        })
+      }
+    })
+  },
+
+  doCert: function () {
+    var page = this;
+    var certInfo = '';
+    for (var index in app.globalData.certlist) {
+      certInfo += app.globalData.certlist[index].shoppingid + ',' + app.globalData.certlist[index].num;
+      certInfo += '@';
+    }
+    certInfo = certInfo.substr(0, certInfo.length - 1);
+    wx.request({
+      url: 'https://www.hattonstar.com/certStock',
+      data: {
+        certInfo: certInfo
+      },
+      method: 'POST',
+      success: function (res) {
+        if (res.data.result) {
+          var str = res.data.str + '库存不足，请修改数量或选择其他商品!'
+          wx.showModal({
+            title: '库存不足',
+            content: str,
+            showCancel: false,
+            success: function (res) {
+              if (res.confirm) {
+              }
+            }
+          })
+          return
+        } else {
+      if (page.data.all_total_price == 0) {
+        page.dealCertFree(certInfo);
+      } else {
+        page.dealCert(certInfo);
+      }
+        }
+      },
+      fail: function (res) {
+        wx.showModal({
+          title: '错误提示',
+          content: '服务器无响应，请联系工作人员!',
+          success: function (res) {
+            if (res.confirm) {
+            } else if (res.cancel) {
+            }
+          }
+        })
+      }
+    })
   }
 })

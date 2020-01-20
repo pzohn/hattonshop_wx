@@ -250,6 +250,12 @@ view .text:first-of-type {
   font-size: 12px;
   margin: 1rpx;
 }
+.sku-stock{
+  color: rgb(173, 173, 207);
+  position: relative;
+  left: 250rpx;
+  margin: 1rpx;
+}
  
 .line{
   width: 95%;

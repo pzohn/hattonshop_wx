@@ -3,6 +3,7 @@ Page({
   data: {
     isLike: true,
     price:0,
+    stock:0,
     detail_id:0,
     iscollect: false,
     video_hide:true,
@@ -96,7 +97,8 @@ Page({
           imgUrls: imgUrls,
           classInfo: classInfo,
           price: res.data.data.shopping.price,
-          gg_image: 'https://www.hattonstar.com/storage/' + res.data.data.shopping.title[0]
+          gg_image: 'https://www.hattonstar.com/storage/' + res.data.data.shopping.title[0],
+          stock: res.data.data.shopping.stock
         });
         if (res.data.data.shopping.video != ""){
           page.setData({
@@ -267,6 +269,18 @@ Page({
   },
 
   buttonOk() {
+    if (this.data.num > this.data.stock){
+      wx.showModal({
+        title: '库存不足',
+        content: '库存不足，请修改数量或选择其他商品!',
+        showCancel:false,
+        success: function (res) {
+          if (res.confirm) {
+          }
+        }
+      })
+      return
+    }
     var page = this;
     if (page.data.buy_flag == true) {
       wx.navigateTo({
