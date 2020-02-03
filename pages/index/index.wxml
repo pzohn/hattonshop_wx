@@ -1,5 +1,8 @@
 <view class="navbar">
     <view class="search">
+        <view class="search_logo">
+        
+        </view>
         <view class="searchBg">
           <view>
             <image src="../../images/sousuo.png" style="width:25px;height:25px;padding-top:2px;padding-right:5px;"></image>
