@@ -1,7 +1,6 @@
 <view class="navbar">
     <view class="search">
-        <view class="search_logo">
-        
+        <view class="btn2">
         </view>
         <view class="searchBg">
           <view>
