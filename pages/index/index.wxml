@@ -126,13 +126,3 @@
     </view>
   </view>
 </view>
-
-<view class='video_container' hidden="{{flag_7}}">
-  <view class='type-item' wx:for="{{activity_6}}" wx:key="{{index}}" data-videoid="{{item.id}}">
-    <image class='type-img' src='{{item.img}}' mode='aspectFill' data-id="{{item.id}}" bindtap='typeHandler'></image>
-    <view class='title'>
-        <text>{{item.name}}</text>
-        <button class='btn' data-id="{{item.id}}" bindtap='typeHandler'>去体验</button>
-    </view>
-  </view>
-</view>

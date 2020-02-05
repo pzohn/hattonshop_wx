@@ -11,22 +11,19 @@ Page({
         text: '首页'
       },
       {
-        text: '蘑法食育'
+        text: '探索课'
       },
       {
-        text: '探索课堂'
+        text: '营地家'
+      },
+      {
+        text: '名师汇'
       },
       {
         text: '星创意'
       },
       {
-        text: '田园营期'
-      },
-      {
-        text: '亲子Culb'
-      },
-      {
-        text: '未来营会'
+        text: 'UP+'
       }
     ],
     currentTab: 0,
@@ -36,14 +33,12 @@ Page({
     activity_3: [],
     activity_4: [],
     activity_5: [],
-    activity_6: [],
     flag_1: true,
     flag_2: true,
     flag_3: true,
     flag_4: true,
     flag_5: true,
     flag_6: true,
-    flag_7: true,
     name: '',
     imgUrls: [],
     indicatorDots: true, //是否显示面板指示点
@@ -63,7 +58,6 @@ Page({
     page.initData(3);
     page.initData(4);
     page.initData(5);
-    page.initData(6);
     page.setData({
       flag_1: false
     });
@@ -106,19 +100,6 @@ Page({
         })
       },
     })
-
-    // var page = this;
-    // page.initData(1);
-    // page.initData(2);
-    // page.initData(3);
-    // page.initData(4);
-    // page.initData(5);
-    // page.initData(6);
-    // page.setData({
-    //   flag_1: false
-    // });
-
-    // this.initData1();
   },
 
   initData1: function () {
@@ -225,11 +206,6 @@ Page({
           else if (id == 5) {
             page.setData({
               activity_5: activity
-            });
-          }
-          else if (id == 6) {
-            page.setData({
-              activity_6: activity
             });
           }
         }
@@ -344,7 +320,6 @@ Page({
     page.initData(3);
     page.initData(4);
     page.initData(5);
-    page.initData(6);
     page.setData({
       flag_1: false
     });
@@ -364,37 +339,32 @@ Page({
     var id = cur + 1;
     if (id == 1) {
       page.setData({
-        flag_1: false, flag_2: true, flag_3: true, flag_4: true, flag_5: true, flag_6: true, flag_7: true, currentTab: id - 1
+        flag_1: false, flag_2: true, flag_3: true, flag_4: true, flag_5: true, flag_6: true, currentTab: id - 1
       });
     }
     else if (id == 2) {
       page.setData({
-        flag_1: true, flag_2: false, flag_3: true, flag_4: true, flag_5: true, flag_6: true, flag_7: true, currentTab: id - 1
+        flag_1: true, flag_2: false, flag_3: true, flag_4: true, flag_5: true, flag_6: true, currentTab: id - 1
       });
     }
     else if (id == 3) {
       page.setData({
-        flag_1: true, flag_2: true, flag_3: false, flag_4: true, flag_5: true, flag_6: true, flag_7: true, currentTab: id - 1
+        flag_1: true, flag_2: true, flag_3: false, flag_4: true, flag_5: true, flag_6: true, currentTab: id - 1
       });
     }
     else if (id == 4) {
       page.setData({
-        flag_1: true, flag_2: true, flag_3: true, flag_4: false, flag_5: true, flag_6: true, flag_7: true, currentTab: id - 1
+        flag_1: true, flag_2: true, flag_3: true, flag_4: false, flag_5: true, flag_6: true, currentTab: id - 1
       });
     }
     else if (id == 5) {
       page.setData({
-        flag_1: true, flag_2: true, flag_3: true, flag_4: true, flag_5: false, flag_6: true, flag_7: true, currentTab: id - 1
+        flag_1: true, flag_2: true, flag_3: true, flag_4: true, flag_5: false, flag_6: true, currentTab: id - 1
       });
     }
     else if (id == 6) {
       page.setData({
-        flag_1: true, flag_2: true, flag_3: true, flag_4: true, flag_5: true, flag_6: false, flag_7: true, currentTab: id - 1
-      });
-    }
-    else if (id == 7) {
-      page.setData({
-        flag_1: true, flag_2: true, flag_3: true, flag_4: true, flag_5: true, flag_6: true, flag_7: false, currentTab: id - 1
+        flag_1: true, flag_2: true, flag_3: true, flag_4: true, flag_5: true, flag_6: false, currentTab: id - 1
       });
     }
   }
