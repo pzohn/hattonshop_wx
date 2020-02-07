@@ -46,7 +46,7 @@
     </swiper>
 
   <view class="page-recommend">
-    <button class='bztj'>精品推荐</button>
+    <view class='bztj'>精品推荐</view>
 
   <view class='hotgoodcontainer'>
       <view class='gooditem' wx:for="{{recommend}}" wx:key="recommend" wx:for-index="idx" wx:for-item="good" bindtap="recommendGood" id="{{good.id}}">
@@ -60,7 +60,7 @@
   </view>
 
   <view class="page-hotrec">
-    <button class='rxhw'>热销好物</button>
+    <view class='rxhw'>热销好物</view>
       <view class='hotgoodcontainer'>
       <view class='gooditem' wx:key="gooditem" wx:for="{{hotrec}}" wx:for-index="idx" wx:for-item="good" bindtap="hotrecGood" id="{{good.id}}">
         <view class='imgview'>
