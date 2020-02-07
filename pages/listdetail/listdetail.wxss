@@ -13,8 +13,33 @@ page {
     border-radius: 10rpx;
     padding: 30rpx;
 }
+
+.Receiving_express {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20rpx;
+    height: 100rpx;
+    background: white;
+    border-radius: 10rpx;
+    padding: 30rpx;
+}
+
+.express {
+    display: flex;
+    flex-direction: column;
+}
+
+.express_btn {
+    color: #7e7e7e;
+}
+
 .icon-arrowright {
   font-size: 60rpx;
+}
+
+.icon-arrowright_express {
+  font-size: 30rpx;
 }
 
 .Receiving_address {

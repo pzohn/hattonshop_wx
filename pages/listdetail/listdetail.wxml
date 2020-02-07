@@ -12,6 +12,14 @@
     </view>
     <view><text class="iconfont icon-arrowright"></text></view>
 </view>
+
+<view class="Receiving_express" hidden="{{!expressFlag}}" bindtap="express">
+    <view class="express">
+        <text class="iconfont arrowright_express">快递单号</text>
+        <text class="iconfont arrowright_express">{{express}}</text>
+    </view>
+    <view><text class="iconfont icon-arrowright express_btn">></text></view>
+</view>
  
 <view class='goods'>
   <view class="goods_msg" wx:for="{{goods_info}}" wx:key="{{index}}">

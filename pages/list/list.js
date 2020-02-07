@@ -3,7 +3,8 @@ Page({
   data: {
     activity: [],
     page_id:0,
-    itemOnFlag:true
+    itemOnFlag:true,
+    expressFlag:false
   },
 
   /**
@@ -12,6 +13,7 @@ Page({
   onLoad: function (options) {
     var page = this;
     var id = options.type;
+    page.setData({ expressFlag: app.globalData.express_flag});
     page.initData(id);
   },
 
@@ -71,6 +73,7 @@ Page({
           object.address = res.data.data[index].address;
           object.total_charge = res.data.data[index].charge;
           object.royalty_charge = res.data.data[index].use_royalty;
+          object.expressFlag = false;
           if (object.status == '待付款'){
             object.payhide = false;
             object.deletehide = false;
@@ -89,6 +92,13 @@ Page({
           } 
           if (object.status == '待处理'){
             object.refundhide = false;
+          }
+          if (object.status == '待收货' || object.status == '已完成') {
+            object.express = res.data.data[index].express;
+            object.expressFlag = true;
+            if (object.express == ''){
+              object.express = '快递号缺失,请联系客户';
+            }
           }
           object.index = index;
           activity[index] = object;

@@ -16,7 +16,8 @@
     "pages/editaddress/editaddress",
     "pages/cart/cart",
     "pages/royalty/royalty",
-    "pages/listdetail/listdetail"
+    "pages/listdetail/listdetail",
+    "pages/express/express"
   ],
   "window": {
     "backgroundTextStyle": "light",

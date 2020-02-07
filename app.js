@@ -107,6 +107,7 @@ App({
     post_url:'',
     index_style:'../index/index',
     fixed_address_flag:false,
-    leasing_id: 0
+    leasing_id: 0,
+    express_flag:true
   }
 })

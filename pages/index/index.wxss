@@ -249,7 +249,7 @@ color: #222;
 
 .bztj{
   width: 70%;
-  background:url('https://www.gfcamps.cn/images/wx_logo/bztj1.png') no-repeat center center;
+  background:url('https://www.gfcamps.cn/images/wx_logo/bztj.png') no-repeat center center;
   background-size: cover;
   height: 70px;
   border-radius: 25rpx;
@@ -263,7 +263,7 @@ color: #222;
 
 .rxhw{
   width: 70%;
-  background:url('https://www.gfcamps.cn/images/wx_logo/rxhw.png') no-repeat center center;
+  background:url('https://www.gfcamps.cn/images/wx_logo/rxhw1.png') no-repeat center center;
   background-size: cover;
   height: 70px;
   border-radius: 25rpx;

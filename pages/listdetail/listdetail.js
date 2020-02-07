@@ -29,7 +29,9 @@ Page({
     type: '',
     status: '',
     page_id:0,
-    btn_hide:true
+    btn_hide:true,
+    express:'',
+    expressFlag: false
   },
 
   //  提交订单
@@ -199,7 +201,6 @@ Page({
    */
   onLoad: function (options) {
     var page_id = options.page_id;
-    var status = options.status;
     this.setData({ page_id: page_id});
     this.initAddr();
     this.initData();
@@ -251,7 +252,17 @@ Page({
     var status = app.globalData.listdetail.status;
     if (status == '待付款'){
       this.setData({btn_hide:false})
-    } 
+    }
+
+    if (app.globalData.express_flag) {
+      if ((status == '待收货') || (status == '已完成')) {
+        this.setData({
+          expressFlag: true,
+          express: app.globalData.listdetail.express
+         });
+      }
+    }
+
     this.setData({
       goods_info: goods_info,
       total_price: total_price,
@@ -260,6 +271,36 @@ Page({
       all_total_price: app.globalData.listdetail.total_charge
     });
     
+  },
+
+  express:function (){
+    var page = this;
+    wx.request({
+      url: 'https://www.hattonstar.com/getExpress',
+      data: {
+        number: page.data.express,
+        shop_id: app.globalData.shop_id
+      },
+      method: 'POST',
+      success: function (res) {
+        if (res.data == -1) {
+          wx.showModal({
+            title: '快递单号有误',
+            content: '快递单号有误,请联系客户!',
+            showCancel:false,
+            success: function (res) {
+              if (res.confirm) {
+                return;
+              } 
+            }
+          })
+        } else{
+          wx.navigateTo({
+            url: '../express/express?id=' + res.data,
+          })
+        }
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
