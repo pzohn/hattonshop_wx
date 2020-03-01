@@ -223,7 +223,6 @@ color: #222;
     display:flex;
     flex-wrap: wrap;
     width:100%;
-    justify-content:center;
 }
 .gooditem{
     width:31%;
