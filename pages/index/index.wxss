@@ -81,7 +81,7 @@
   margin-top:2%;
   width: 25%;
   height: 50px;
-  background:url('https://www.gfcamps.cn/images/wx_logo/logo.png') no-repeat center center;
+  background:url('https://www.hattonstar.com/images/wx_logo/logo.png') no-repeat center center;
   background-size: cover;
   border-radius: 25rpx;
   font-size: 14px;
@@ -169,7 +169,7 @@ swiper,swiper-item
 .btn{
   right: 10rpx;
   width: 24%;
-  background:url('https://www.gfcamps.cn/sun/goumai.png') no-repeat center center;
+  background:url('https://www.hattonstar.com/sun/goumai.png') no-repeat center center;
   background-size: cover;
   height: 28px;
   border-radius: 25rpx;
@@ -248,7 +248,7 @@ color: #222;
 
 .bztj{
   width: 70%;
-  background:url('https://www.gfcamps.cn/images/wx_logo/bztj.png') no-repeat center center;
+  background:url('https://www.hattonstar.com/images/wx_logo/bztj.png') no-repeat center center;
   background-size: cover;
   height: 70px;
   border-radius: 25rpx;
@@ -262,7 +262,7 @@ color: #222;
 
 .rxhw{
   width: 70%;
-  background:url('https://www.gfcamps.cn/images/wx_logo/rxhw1.png') no-repeat center center;
+  background:url('https://www.hattonstar.com/images/wx_logo/rxhw1.png') no-repeat center center;
   background-size: cover;
   height: 70px;
   border-radius: 25rpx;
